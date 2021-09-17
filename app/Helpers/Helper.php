@@ -8,7 +8,7 @@
 
         $fecha_inicio = strtotime($fecha_inicio);
         $fecha_fin = strtotime($fecha_fin);
-        $fecha = strtotime($fecha);
+        $fecha = $fecha;
 
         if(($fecha >= $fecha_inicio) && ($fecha <= $fecha_fin)) {
 
