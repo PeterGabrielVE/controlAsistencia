@@ -58,9 +58,6 @@ MARCAS</h1>
 
                                         @foreach ($asistencia as $key => $a)
 
-
-
-
                                                         @if(check_day(date("d-m-Y", $i),$a['user_id']) == true)
                                                         @if(date("d-m-Y", $i) === Carbon\Carbon::parse($a['fecha'])->format('d-m-Y'))
                                                         <tr class="tbody">
@@ -76,7 +73,7 @@ MARCAS</h1>
                                                         </tr>
                                                         @endif
                                                         @else
-                                                        @if(check_in_range($a['since'],$a['until'],$a['fecha']))
+
                                                         <tr class="tbody">
                                                             <td>{{ date("d-m-Y", $i) }}</td>
                                                             <td>@isset($a['since']){{ Carbon\Carbon::createFromFormat('Y-m-d', $a['since'])->format('d-m-Y')  }} @endisset</td>
@@ -88,12 +85,8 @@ MARCAS</h1>
                                                             <td></td>
                                                             <td>No Trabajo</td>
                                                         </tr>
+                                                        @break
                                                         @endif
-
-                                                        @endif
-
-
-
                                         @endforeach
                                 @endfor
 
