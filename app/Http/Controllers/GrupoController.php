@@ -49,10 +49,16 @@ class GrupoController extends Controller
      */
     public function store(Request $request)
     {
+        try{
         $data = $request->all();         
         Group::create($data);
         toastr()->success('¡Se ha registrado exitosamente!');
         return response()->json(['message'=>'Grupo registrado correctamente']);
+
+    }catch (\Exception $e){
+        toastr()->success('¡Ocurrió un problema!');
+        return redirect()->back();
+     }
     }
 
     /**
@@ -87,11 +93,17 @@ class GrupoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        try{
         $group = Group::find($id);
         $group->update($request->all());
         $group->save();
         toastr()->success('¡Se ha actualizado exitosamente!');
         Session::flash('message-success',' Grupo '. $request->group.' editada correctamente.');
+        
+    }catch (\Exception $e){
+        toastr()->success('¡Ocurrió un problema!');
+        return redirect()->back();
+     }
     }
 
     /**

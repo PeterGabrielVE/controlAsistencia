@@ -69,6 +69,7 @@ class UserController extends Controller
      */
     public function store(createRequest $request)
     {
+        try{
         $data = $request->all();
 
         $file = $request->file('file');
@@ -99,6 +100,11 @@ class UserController extends Controller
         DB::insert('insert into users_groups (id_user, id_group) values (?, ?)', [$lastUser->id, $request->id_grupo]);
         toastr()->success('¡Se ha registrado exitosamente!');
         Session::flash('message-success',' User '. $request->fullname.' creado correctamente.');
+
+    }catch (\Exception $e){
+        toastr()->success('¡Ocurrió un problema!');
+        return redirect()->back();
+     }
     }
 
     /**
@@ -187,10 +193,16 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        try{
         $user->delete();
         toastr()->success('¡Se ha eliminado exitosamente!');
         Session::flash('message-success','Usuario elminado correctamente');
         return Redirect::to('user');
+
+    }catch (\Exception $e){
+        toastr()->success('¡Ocurrió un problema!');
+        return redirect()->back();
+     }
     }
 
     /**

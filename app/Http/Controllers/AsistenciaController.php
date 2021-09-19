@@ -106,12 +106,19 @@ class AsistenciaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        try{
         $asis = Asistencia::find($id);
         $asis->note = $request->note;
         $asis->sistema = $request->sistema;
         $asis->save();
         toastr()->success('¡Se ha actualizado exitosamente!');
+
+        }catch (\Exception $e){
+           toastr()->success('¡Ocurrió un problema!');
+           return redirect()->back();
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -121,7 +128,13 @@ class AsistenciaController extends Controller
      */
     public function destroy($id)
     {
+        try{
         $asis = Asistencia::find($id);
         $asis->delete();
+
+    }catch (\Exception $e){
+        toastr()->success('¡Ocurrió un problema!');
+        return redirect()->back();
+     }
     }
 }

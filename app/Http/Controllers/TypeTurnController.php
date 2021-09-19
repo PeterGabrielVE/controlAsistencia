@@ -38,10 +38,16 @@ class TypeTurnController extends Controller
      */
     public function store(Request $request)
     {
+        try{
         $data = $request->all();         
         Type_Turn::create($data);
         toastr()->success('¡Se ha registrado exitosamente!');
         return response()->json(['message'=>'Tipo registrado correctamente']);
+
+    }catch (\Exception $e){
+        toastr()->success('¡Ocurrió un problema!');
+        return redirect()->back();
+     }
     }
 
     /**
@@ -76,10 +82,16 @@ class TypeTurnController extends Controller
      */
     public function update(Request $request, $id)
     {
+        try{
         $turn = Type_Turn::find($id);
         $turn->update($request->all());
         toastr()->success('¡Se ha actualizado exitosamente!');
         Session::flash('message-success',' Posición actualizado correctamente.');
+
+    }catch (\Exception $e){
+        toastr()->success('¡Ocurrió un problema!');
+        return redirect()->back();
+     }
     }
 
     /**
@@ -90,9 +102,15 @@ class TypeTurnController extends Controller
      */
     public function destroy($id)
     {
+        try{
         $turn =Type_Turn::find($id);
         $turn->delete();
         toastr()->success('¡Se ha eliminado exitosamente!');
         return response()->json(['message'=>'Posición eliminado correctamente']);
+
+    }catch (\Exception $e){
+        toastr()->success('¡Ocurrió un problema!');
+        return redirect()->back();
+     }
     }
 }
