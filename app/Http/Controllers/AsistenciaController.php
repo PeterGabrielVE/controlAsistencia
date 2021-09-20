@@ -37,7 +37,6 @@ class AsistenciaController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
         try{
             $img = $request->image;
             $path = public_path().'/img/avatar/';
@@ -53,22 +52,37 @@ class AsistenciaController extends Controller
             $file = $path . $fileName;
             file_put_contents($file, $image_base64);
 
+            if($request->tipo == 0){
+                $asis = new Asistencia();
+                $asis->id_user = Auth::user()->id;
+                $asis->fecha = Carbon::now();
+                $asis->tipo = $request->tipo;
+                $asis->sistema = 'web';
+                $asis->ip = $request->ip();
+                $asis->image = $fileName;
+                $asis->latitude = $request->latitude;
+                $asis->longitude = $request->longitude;
+                $asis->save();
+                toastr()->success('¡Se ha registrado exitosamente!');
 
-            $asis = new Asistencia();
-            $asis->id_user = Auth::user()->id;
-            $asis->fecha = Carbon::now();
-            $asis->tipo = $request->tipo;
-            $asis->sistema = 'web';
-            $asis->ip = $request->ip();
-            $asis->image = $fileName;
-            $asis->latitude = $request->latitude;
-            $asis->longitude = $request->longitude;
-            $asis->save();
-            toastr()->success('¡Se ha registrado exitosamente!');
+                return redirect()->back();
+            }else{
+                $asis = Asistencia::where('id_user',Auth::user()->id)->orderBy('fecha', 'desc')->first();
+                $marca = Asistencia::find($asis->id);
+                $marca->fecha_salida = Carbon::now();
+                $marca->tipo = $request->tipo;
+                $marca->ip_salida = $request->ip();
+                $marca->image_salida = $fileName;
+                $marca->latitude_salida = $request->latitude;
+                $marca->longitude_salida = $request->longitude;
 
-            return redirect()->back();
+                $marca->save();
+                toastr()->success('¡Se ha registrado exitosamente!');
+                return redirect()->back();
+            }
+
         }catch (\Exception $e){
-            toastr()->success('¡Ocurrió un problema!');
+            toastr()->error('¡Ocurrió un problema!');
             return redirect()->back();
         }
     }
