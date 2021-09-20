@@ -75,7 +75,7 @@ class PlannerController extends Controller
         $planner->tipo_planificador = $request->tipo_planificador;
         $planner->Estado = $request->Estado;
         $planner->planificacion = $plann;
-        $planner->save(); 
+        $planner->save();
         toastr()->success('¡Se ha registrado exitosamente!');
         return redirect()->route('planificador.index');
     }
@@ -200,8 +200,11 @@ class PlannerController extends Controller
                 return back()->withInput();
             }
 
-
             $data = $request->all();
+            $planner = Planner::find($request->planner_id);
+            $turnos = explode(",", $planner->planificacion);
+            DB::statement('CALL guardarfechas(?,?,?,?,?,?,?,?,?,?,?)', array($request->user_id, $request->planner_id,
+            $request->since, $request->until, $turnos[0],$turnos[1],$turnos[2], $turnos[3], $turnos[4], $turnos[5], $turnos[6] ));
             Assignment::create($data);
             toastr()->success('¡Registro existoso!');
             return redirect()->back();
