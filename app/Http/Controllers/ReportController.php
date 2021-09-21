@@ -26,61 +26,12 @@ class ReportController extends Controller
 
         ini_set('max_execution_time', 300);
         set_time_limit(0);
-        $jorn1= DB::table('jornada')->get();
-        $primer = Assignment::first();
-        $ultimo = Assignment::orderBy('id', 'desc')->first();
-        $inicio = strtotime($primer->since);
-        $final = strtotime($ultimo->until."+ 1 days");
-        $jornada = array();
-        $asistencia = array();
-        //dd($final);
+        $asistencia = DB::table('jornada')->get();
+        $primer = DB::table('calendar')->first();
+        $ultimo = DB::table('calendar')->orderBy('id', 'desc')->first();
+        $inicio = strtotime($primer->fecha);
+        $final = strtotime($ultimo->fecha."+ 1 days");
 
-        //dd($jorn1);
-        $jorn1 = json_decode($jorn1, true);
-        //dd($jorn1);
-        for ($i=0; $i < count($jorn1)-1; $i++) {
-            //dd($jorn1[$i]['fecha']);
-            if(Carbon::parse($jorn1[$i]['fecha'])->format('d-m-Y') == Carbon::parse($jorn1[$i+1]['fecha'])->format('d-m-Y') && $jorn1[$i]['rut'] == $jorn1[$i+1]['rut']
-            && $jorn1[$i]['tipo'] != $jorn1[$i+1]['tipo']){
-                $jornada = [
-                    'id'=>$jorn1[$i]['id'],
-                    'since'=>$jorn1[$i]['since'],
-                    'until'=>$jorn1[$i]['until'],
-                    'first_name'=>$jorn1[$i]['first_name'],
-                    'last_name'=>$jorn1[$i]['last_name'],
-                    'user_id'=>$jorn1[$i]['user_id'],
-                    'rut'=>$jorn1[$i]['rut'],
-                    'planificacion'=>$jorn1[$i]['planificacion'],
-                    'fecha'=>$jorn1[$i]['fecha'],
-                    'entrada'=>$jorn1[$i+1]['fecha'],
-                    'salida'=>$jorn1[$i]['fecha']
-                ];
-                $asistencia[] = $jornada;
-
-            }
-
-            if(Carbon::parse($jorn1[$i]['fecha'])->format('d-m-Y') != Carbon::parse($jorn1[$i+1]['fecha'])->format('d-m-Y') && $jorn1[$i]['rut'] == $jorn1[$i+1]['rut']
-            && $jorn1[$i]['tipo'] == 0){
-                $jornada = [
-                    'id'=>$jorn1[$i]['id'],
-                    'since'=>$jorn1[$i]['since'],
-                    'until'=>$jorn1[$i]['until'],
-                    'first_name'=>$jorn1[$i]['first_name'],
-                    'last_name'=>$jorn1[$i]['last_name'],
-                    'user_id'=>$jorn1[$i]['user_id'],
-                    'rut'=>$jorn1[$i]['rut'],
-                    'planificacion'=>$jorn1[$i]['planificacion'],
-                    'fecha'=>$jorn1[$i]['fecha'],
-                    'entrada'=>$jorn1[$i]['fecha'],
-                    'salida'=>''
-                ];
-                $asistencia[] = $jornada;
-
-            }
-
-         }
-
-        //dd($asistencia);
         return view('pages.report.jornada',compact('asistencia','inicio','final'));
     }
 

@@ -3,6 +3,7 @@
     use App\Models\Turn;
     use App\Asistencia;
     use App\Models\Type_Turn;
+    use App\Models\Assignment;
 
     function check_in_range($fecha_inicio, $fecha_fin, $fecha){
 
@@ -21,36 +22,25 @@
         }
     }
 
-    function check_turn($fecha,$planificacion){
+    function check_turn($fecha,$turn){
 
         //$day = date('l', $fecha);
-        $day = (date('N', $fecha)) - 1;
-        $array = explode ( ',', $planificacion);
-        $longitud = count($array) - 1;
+        /*$day = (date('N', $fecha)) - 1;
 
-
-        for($i=0; $i <= $longitud; $i++)
-        {
-            if($i  == $day){
-                $turn = Turn::find($array[$i]);
+            if($turn  == $day){*/
+                $turn = Turn::find($turn);
                 return $turn->detalles;
-            }
-
-        }
+            //}
 
     }
 
-    function obtener_atraso($fecha,$planificacion,$hour){
+    function obtener_atraso($fecha,$turn,$hour){
 
         //$day = date('l', $fecha);
         $day = (date('N', $fecha)) - 1;
-        $array = explode ( ',', $planificacion);
-        $longitud = count($array) - 1;
 
-        for($i=0; $i <= $longitud; $i++)
-        {
-            if($i  == $day){
-                $turn = Turn::find($array[$i]);
+
+                $turn = Turn::find($turn);
                 $ingreso = $turn->ingreso;
 
                 $horaInicio = $ingreso.':00';
@@ -74,9 +64,6 @@
                 $difs=$dif-($difm*60)-($difh*3600);
                 return $difh.' Horas '.$difm.' minutos';
 
-            }
-
-        }
 
     }
 
@@ -90,4 +77,9 @@
         } else {
             return false;
         }
+    }
+
+    function obtener_plan($id,$user,$column){
+
+        return Assignment::where('planner_id',$id)->where('user_id',$user)->value($column);
     }
