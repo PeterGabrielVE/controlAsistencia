@@ -68,7 +68,7 @@ MARCAS</h1>
                                                     <td>{{ check_turn($i,$a->turno) }}</td>
                                                     <td>{{ Carbon\Carbon::parse($a->fecha_entrada)->format('g:i:s A') ?? null }}</td>
                                                     <td>{{ obtener_atraso($i,$a->turno,$a->fecha_entrada) ?? null }}</td>
-                                                    <td>{{ Carbon\Carbon::parse($a->fecha_salida)->format('g:i:s A') ?? null }}</td>
+                                                    <td>@if(isset($a->fecha_salida)) {{ Carbon\Carbon::parse($a->fecha_salida)->format('g:i:s A')}} @endif </td>
                                                 </tr>
                                             @else
                                                 <tr class="tbody">
