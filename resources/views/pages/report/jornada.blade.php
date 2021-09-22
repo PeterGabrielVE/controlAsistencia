@@ -82,7 +82,7 @@ MARCAS</h1>
                                                     <td></td>
                                                     <td>No trabajo</td>
                                                 </tr>
-                                                @break
+
                                             @endif
                                             @endif
                                         @endforeach
