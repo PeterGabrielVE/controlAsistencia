@@ -57,7 +57,7 @@ MARCAS</h1>
                                 @for($i=$inicio; $i<=$final; $i+=86400)
 
                                         @foreach ($asistencia as $a)
-                                        @if (check_in_range($a->since, $a->until, $i))
+
                                             @if(date("d-m-Y", $i) === Carbon\Carbon::parse($a->fecha)->format('d-m-Y'))
                                                 <tr class="tbody">
                                                     <td>{{ date("d-m-Y", $i) }}</td>
@@ -66,24 +66,11 @@ MARCAS</h1>
                                                     <td>{{ $a->first_name }} {{ $a->last_name }}</td>
                                                     <td>{{ $a->rut }}</td>
                                                     <td>{{ check_turn($i,$a->turno) }}</td>
-                                                    <td>{{ Carbon\Carbon::parse($a->fecha_entrada)->format('g:i:s A') ?? null }}</td>
-                                                    <td>{{ obtener_atraso($i,$a->turno,$a->fecha_entrada) ?? null }}</td>
-                                                    <td>@if(isset($a->fecha_salida)) {{ Carbon\Carbon::parse($a->fecha_salida)->format('g:i:s A')}} @endif </td>
-                                                </tr>
-                                            @else
-                                                <tr class="tbody">
-                                                    <td>{{ date("d-m-Y", $i) }}</td>
-                                                    <td>{{ $a->since }}</td>
-                                                    <td>{{ $a->until }}</td>
-                                                    <td>{{ $a->first_name }} {{ $a->last_name }}</td>
-                                                    <td>{{ $a->rut }}</td>
-                                                    <td>{{ check_turn($i,$a->turno) }}</td>
-                                                    <td>No trabajo</td>
-                                                    <td></td>
-                                                    <td>No trabajo</td>
+                                                    <td>@if($a->fecha_entrada != ''){{ Carbon\Carbon::parse($a->fecha_entrada)->format('g:i:s A') ?? null }} @endif </td>
+                                                    <td>@if($a->fecha_entrada != ''){{ obtener_atraso($i,$a->turno,$a->fecha_entrada) ?? null }} @endif </td>
+                                                    <td>@if($a->fecha_salida != '') {{ Carbon\Carbon::parse($a->fecha_salida)->format('g:i:s A')}} @endif </td>
                                                 </tr>
 
-                                            @endif
                                             @endif
                                         @endforeach
                                 @endfor
