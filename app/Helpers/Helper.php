@@ -87,6 +87,9 @@
     function obtener_salida($id){
 
         $asis = Asistencia::find($id);
-        return Carbon\Carbon::parse($asis->fecha_salida)->format('g:i:s A');
+        if($asis){
+            return Carbon\Carbon::parse($asis->fecha_salida)->format('g:i:s A');
+        }
+
     }
 
