@@ -32,7 +32,7 @@ class ReportController extends Controller
         $inicio = strtotime($primer->fecha);
         $final = strtotime($ultimo->fecha."+ 1 days");
 
-        dd($asistencia);
+        //dd($asistencia);
 
         return view('pages.report.jornada',compact('asistencia','inicio','final'));
     }
