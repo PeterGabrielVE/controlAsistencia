@@ -68,7 +68,7 @@ class AsistenciaController extends Controller
                 return redirect()->back();
             }else{
                 $asis = Asistencia::where('id_user',Auth::user()->id)->orderBy('fecha', 'desc')->first();
-                dd($asis);
+                //dd($asis);
 
                 $marca = Asistencia::find($asis->id);
                 $marca->fecha_salida = Carbon::now();
