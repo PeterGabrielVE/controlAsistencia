@@ -58,13 +58,13 @@ MARCAS</h1>
 
                                         @foreach ($asistencia as $a)
 
-                                            @if(date("d-m-Y", $i) === Carbon\Carbon::parse($a->fecha)->format('d-m-Y'))
+
                                                 <tr class="tbody">
                                                     <td>{{ date("d-m-Y", $i) }}</td>
 
                                                 </tr>
 
-                                            @endif
+
                                         @endforeach
                                 @endfor
 
