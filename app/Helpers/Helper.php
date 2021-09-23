@@ -83,3 +83,10 @@
 
         return Assignment::where('planner_id',$id)->where('user_id',$user)->value($column);
     }
+
+    function obtener_salida($id){
+
+        $asis = Asistencia::find($id);
+        return Carbon\Carbon::parse($asis->fecha_salida)->format('g:i:s A');
+    }
+
