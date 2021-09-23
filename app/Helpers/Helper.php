@@ -88,7 +88,9 @@
 
         $asis = Asistencia::find($id);
         if($asis){
+            if(!is_null($asis->fecha_salida)){
             return Carbon\Carbon::parse($asis->fecha_salida)->format('g:i:s A');
+            }
         }
 
     }
