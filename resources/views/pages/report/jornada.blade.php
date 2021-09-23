@@ -54,19 +54,6 @@ MARCAS</h1>
                                 </tr>
                             </thead>
                             <tbody id="tbody">
-                                @for($i=$inicio; $i<=$final; $i+=86400)
-
-                                        @foreach ($asistencia as $a)
-
-
-                                                <tr class="tbody">
-                                                    <td>{{ date("d-m-Y", $i) }}</td>
-
-                                                </tr>
-
-
-                                        @endforeach
-                                @endfor
 
                             </tbody>
                         </table>
