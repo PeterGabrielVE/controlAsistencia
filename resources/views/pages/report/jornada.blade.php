@@ -61,14 +61,7 @@ MARCAS</h1>
                                             @if(date("d-m-Y", $i) === Carbon\Carbon::parse($a->fecha)->format('d-m-Y'))
                                                 <tr class="tbody">
                                                     <td>{{ date("d-m-Y", $i) }}</td>
-                                                    <td>{{ $a->since }}</td>
-                                                    <td>{{ $a->until }}</td>
-                                                    <td>{{ $a->first_name }} {{ $a->last_name }}</td>
-                                                    <td>{{ $a->rut }}</td>
-                                                    <td>{{ check_turn($i,$a->turno) }}</td>
-                                                    <td>@if($a->fecha_entrada != ''){{ Carbon\Carbon::parse($a->fecha_entrada)->format('g:i:s A') ?? null }} @endif </td>
-                                                    <td>@if($a->fecha_entrada != ''){{ obtener_atraso($i,$a->turno,$a->fecha_entrada) ?? null }} @endif </td>
-                                                    <td>@if($a->fecha_salida != '') {{ Carbon\Carbon::parse($a->fecha_salida)->format('g:i:s A')}} @endif </td>
+
                                                 </tr>
 
                                             @endif
