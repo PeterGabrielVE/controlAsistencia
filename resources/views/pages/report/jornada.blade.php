@@ -59,7 +59,7 @@ JORNADA</h1>
                                         @foreach ($asistencia as $a)
 
                                             @if(date("d-m-Y", $i) === Carbon\Carbon::parse($a->fecha)->format('d-m-Y'))
-                                                <tr class="tbody" @if($a->fecha_entrada == '' || $a->fecha_entrada == null) style="background: #ffb3b3;" @endif>
+                                                <tr class="tbody" @if($a->fecha_entrada == '' || $a->fecha_entrada == null) style="background: #ffe6e6;" @endif>
                                                     <td>{{ date("d-m-Y", $i) }}</td>
                                                     <td>{{ Carbon\Carbon::parse($a->since)->format('d-m-Y') }}</td>
                                                     <td>{{ Carbon\Carbon::parse($a->until)->format('d-m-Y') }}</td>
