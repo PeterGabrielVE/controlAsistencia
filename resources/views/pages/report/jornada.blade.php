@@ -13,7 +13,7 @@
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 @section('title')
 <h1 class="nav-title text-white"> <i class="icon icon-documents3 text-blue s-18"></i>
-MARCAS</h1>
+JORNADA</h1>
 @endsection
 @section('maincontent')
 
@@ -61,11 +61,11 @@ MARCAS</h1>
                                             @if(date("d-m-Y", $i) === Carbon\Carbon::parse($a->fecha)->format('d-m-Y'))
                                                 <tr class="tbody">
                                                     <td>{{ date("d-m-Y", $i) }}</td>
-                                                    <td>{{ $a->since }}</td>
-                                                    <td>{{ $a->until }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($a->since)->format('d-m-Y') }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($a->until)->format('d-m-Y') }}</td>
                                                     <td>{{ $a->first_name }} {{ $a->last_name }}</td>
                                                     <td>{{ $a->rut }}</td>
-                                                    <td>{{ check_turn($i,$a->turno) }}</td>
+                                                    <td> @isset($a->turno){{ check_turn($i,$a->turno) }} @endif</td>
                                                     <td>@if($a->fecha_entrada != ''){{ Carbon\Carbon::parse($a->fecha_entrada)->format('g:i:s A') ?? null }} @endif </td>
                                                     <td>@if($a->fecha_entrada != ''){{ obtener_atraso($i,$a->turno,$a->fecha_entrada) ?? null }} @endif </td>
                                                     <td>@if($a->marca != '' || $a->marca != null){{ obtener_salida($a->marca) }} @endif </td>

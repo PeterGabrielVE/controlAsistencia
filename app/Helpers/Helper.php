@@ -29,7 +29,12 @@
 
             if($turn  == $day){*/
                 $turn = Turn::find($turn);
-                return $turn->detalles;
+                if($turn){
+                    return $turn->detalles;
+                }else{
+                    return '';
+                }
+
             //}
 
     }
