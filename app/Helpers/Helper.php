@@ -62,12 +62,19 @@
                 $ini=((($horai*60)*60)+($mini*60)+$segi);
                 $fin=((($horaf*60)*60)+($minf*60)+$segf);
 
-                $dif=$ini-$fin;
-
-                $difh=floor($dif/3600);
-                $difm=floor(($dif-($difh*3600))/60);
-                $difs=$dif-($difm*60)-($difh*3600);
-                return $difh.' Horas '.$difm.' minutos';
+                if($fin > $ini){
+                    $dif=$ini-$fin;
+                    $difh=floor($dif/3600);
+                    $difm=floor(($dif-($difh*3600))/60);
+                    $difs=$dif-($difm*60)-($difh*3600);
+                    return '- '.$difh.' Horas '.$difm.' minutos';
+                }else{
+                    $dif=$fin-$ini;
+                    $difh=floor($dif/3600);
+                    $difm=floor(($dif-($difh*3600))/60);
+                    $difs=$dif-($difm*60)-($difh*3600);
+                    return $difh.' Horas '.$difm.' minutos';
+                }
 
 
     }
