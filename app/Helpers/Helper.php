@@ -67,7 +67,7 @@
                 $difh=floor($dif/3600);
                 $difm=floor(($dif-($difh*3600))/60);
                 $difs=$dif-($difm*60)-($difh*3600);
-                return $difh.' Horas '.$difm.' minutos';
+                return $horaInicio;
 
 
     }
