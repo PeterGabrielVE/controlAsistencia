@@ -45,10 +45,15 @@
         $day = (date('N', $fecha)) - 1;
 
 
+
+
                 $turn = Turn::find($turn);
                 $ingreso = $turn->ingreso;
 
                 $horaInicio = $ingreso.':00';
+                $actual =Carbon\Carbon::parse($hour)->format('Y-m-d');
+
+                $date = $actual.' '.$horaInicio;
                 $horafin = Carbon\Carbon::parse($hour)->format('H:i:s');
 
                 $horai=substr($horaInicio,0,2);
@@ -62,7 +67,7 @@
                 $ini=((($horai*60)*60)+($mini*60)+$segi);
                 $fin=((($horaf*60)*60)+($minf*60)+$segf);
 
-                if($fin > $ini){
+                if($date > $hour){
                     $dif=$ini-$fin;
                     $difh=floor($dif/3600);
                     $difm=floor(($dif-($difh*3600))/60);
