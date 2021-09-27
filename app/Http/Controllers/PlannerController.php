@@ -219,6 +219,7 @@ class PlannerController extends Controller
     public function assignmentUpdate(Request $request)
     {
         $assig1 = Assignment::where('user_id',$request->user_id)
+        ->where('id','!=',$request->id_assignment)
         ->whereRaw('? between since and until', [$request->since])
         ->get();
 
@@ -228,6 +229,7 @@ class PlannerController extends Controller
         }
 
         $assig2 = Assignment::where('user_id',$request->user_id)
+        ->where('id','!=',$request->id_assignment)
         ->whereRaw('? between since and until', [$request->until])
         ->get();
 
@@ -237,6 +239,7 @@ class PlannerController extends Controller
         }
 
         $assig3 = Assignment::where('user_id',$request->user_id)
+        ->where('id','!=',$request->id_assignment)
         ->WhereBetween('since', [$request->since,$request->until])
         ->get();
 
@@ -246,6 +249,7 @@ class PlannerController extends Controller
         }
 
         $assig4 = Assignment::where('user_id',$request->user_id)
+        ->where('id','!=',$request->id_assignment)
         ->WhereBetween('until', [$request->since,$request->until])
         ->get();
 
