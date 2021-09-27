@@ -257,8 +257,14 @@ class PlannerController extends Controller
 
         $data = $request->all();
         $assig = assignment::find($request->id_assignment);
-        toastr()->success('¡Se ha actualizado exitosamente!');
         $assig->update($data);
+
+        $calendar = DB::table('calendar')->where('usuario',$request->user_id)->where('plan',$request->planner_id)->delete();
+        $planner = Planner::find($request->planner_id);
+        $turnos = explode(",", $planner->planificacion);
+        DB::statement('CALL guardarfechas(?,?,?,?,?,?,?,?,?,?,?)', array($request->user_id, $request->planner_id,
+            $request->since, $request->until, $turnos[0],$turnos[1],$turnos[2], $turnos[3], $turnos[4], $turnos[5], $turnos[6] ));
+
         toastr()->success('¡Se ha actualizado exitosamente!');
         return redirect()->back();
     }
@@ -266,8 +272,10 @@ class PlannerController extends Controller
     public function assignmentDestroy($id)
     {
         $planner = Assignment::find($id);
+        $calendar = DB::table('calendar')->where('usuario',$planner->user_id)->where('plan',$planner->planner_id)->delete();
         $planner->delete();
         toastr()->success('¡Planificador eliminado correctamente!');
+
         return response()->json(['message'=>'Planificador eliminado correctamente']);
     }
 
