@@ -37,7 +37,18 @@ MARCAS</h1>
                                 {!! Form::text('sistema', $asistencia->sistema ?? null, ['class'=>'form-control r-0 light s-12','id'=>'horas_trabajo']) !!}
                                 <span class="ingreso_span"></span>
                             </div>
-                            <div class="form-group col-6 m-0" id="tipo_colacion_group">
+                            <div class="form-group col-3 m-0" id="ingreso_max_group">
+                                {!! Form::label('horas_trabajo', 'Fecha', ['class'=>'col-form-label s-12']) !!}
+                                {!! Form::text('fecha', Carbon\Carbon::parse($asistencia->fecha)->format('d-m-Y H:i:s') ?? null, ['class'=>'form-control r-0 light s-12','id'=>'fecha']) !!}
+                                <span class="ingreso_span"></span>
+                            </div>
+                            <div class="form-group col-3 m-0" id="ingreso_max_group">
+                                {!! Form::label('horas_trabajo', 'Fecha Salida', ['class'=>'col-form-label s-12']) !!}
+                                {!! Form::text('fecha_salida', Carbon\Carbon::parse($asistencia->fecha_salida)->format('d-m-Y H:i:s') ?? null, ['class'=>'form-control r-0 light s-12','id'=>'fecha_salida']) !!}
+                                <span class="ingreso_span"></span>
+                            </div>
+
+                            <div class="form-group col-12 m-0" id="tipo_colacion_group">
                                 {!! Form::label('tiempo_colacion', 'Nota', ['class'=>'col-form-label s-12']) !!}
                                 {!! Form::textarea('note',$asistencia->note ?? null, ['class'=>'form-control r-0 light s-12','id'=>'tipo_colacion_id','rows'=>'2']) !!}
                                 <span class="tipo_colacion_span"></span>
@@ -78,6 +89,11 @@ MARCAS</h1>
     crossorigin=""></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 <script>
+
+$('#fecha,#fecha_salida').datetimepicker({
+   format : 'd-m-Y H:m:s'
+});
+
 
 var map;
 var myLatLng;

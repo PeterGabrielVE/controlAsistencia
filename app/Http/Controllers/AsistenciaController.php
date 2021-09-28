@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use DateTime;
 use App\Asistencia;
 
 class AsistenciaController extends Controller
@@ -122,17 +123,27 @@ class AsistenciaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
+        //try{
         $asis = Asistencia::find($id);
         $asis->note = $request->note;
         $asis->sistema = $request->sistema;
+
+        $date = DateTime::createFromFormat('d-m-Y H:i:s', $request->fecha);
+        $date = $date->format('Y-m-d H:i:s');
+
+        $date_exit = DateTime::createFromFormat('d-m-Y H:i:s', $request->fecha_salida);
+        $date_exit = $date_exit->format('Y-m-d H:i:s');
+
+        $asis->fecha = $date;
+        $asis->fecha_salida = $date_exit;
         $asis->save();
         toastr()->success('¡Se ha actualizado exitosamente!');
+        return redirect()->back();
 
-        }catch (\Exception $e){
+        /*}catch (\Exception $e){
            toastr()->success('¡Ocurrió un problema!');
            return redirect()->back();
-        }
+        }*/
     }
 
 
