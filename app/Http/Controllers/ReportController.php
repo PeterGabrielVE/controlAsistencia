@@ -27,8 +27,8 @@ class ReportController extends Controller
         ini_set('max_execution_time', 300);
         set_time_limit(0);
         $asistencia = DB::table('jornada')->get();
-        $primer = DB::table('calendar')->first();
-        $ultimo = DB::table('calendar')->orderBy('id', 'desc')->first();
+        $primer = DB::table('jornada')->first();
+        $ultimo = DB::table('jornada')->orderBy('fecha', 'desc')->first();
         $inicio = strtotime($primer->fecha);
         $final = strtotime($ultimo->fecha."+ 1 days");
 
