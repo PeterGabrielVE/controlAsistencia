@@ -25,7 +25,23 @@ MARCAS</h1>
             <div class="card">
                 <div class="form-group">
                     <div class="card-header white">
-                        <h6> MARCA </h6>
+                        <div class="row">
+                            <div class="col-4">
+                                <h6> MARCA </h6>
+                            </div>
+
+                            <div class="form-group col-4 m-0" id="ingreso_max_group">
+
+                                {!! Form::text('sistema', $asistencia->fecha ?? null, ['class'=>'form-control r-0 light s-12','readonly']) !!}
+                                <span class="ingreso_span"></span>
+                            </div>
+                            <div class="form-group col-4 m-0" id="ingreso_max_group">
+
+                                {!! Form::text('sistema', $asistencia->fecha_salida ?? null, ['class'=>'form-control r-0 light s-12','readonly']) !!}
+                                <span class="ingreso_span"></span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -38,7 +54,7 @@ MARCAS</h1>
                                 <span class="ingreso_span"></span>
                             </div>
                             <div class="form-group col-3 m-0" id="ingreso_max_group">
-                                {!! Form::label('horas_trabajo', 'Fecha', ['class'=>'col-form-label s-12']) !!}
+                                {!! Form::label('horas_trabajo', 'Fecha Entrada', ['class'=>'col-form-label s-12']) !!}
                                 {!! Form::text('fecha', Carbon\Carbon::parse($asistencia->fecha)->format('d-m-Y H:i:s') ?? null, ['class'=>'form-control r-0 light s-12','id'=>'fecha']) !!}
                                 <span class="ingreso_span"></span>
                             </div>

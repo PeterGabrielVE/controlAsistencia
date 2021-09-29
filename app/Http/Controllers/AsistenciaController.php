@@ -52,7 +52,7 @@ class AsistenciaController extends Controller
 
             $file = $path . $fileName;
             file_put_contents($file, $image_base64);
-
+            //dd($request->tipo);
             if($request->tipo == 0){
                 $asis = new Asistencia();
                 $asis->id_user = Auth::user()->id;
@@ -69,11 +69,10 @@ class AsistenciaController extends Controller
                 return redirect()->back();
             }else{
                 $asis = Asistencia::where('id_user',Auth::user()->id)->orderBy('fecha', 'desc')->first();
-                //dd($asis);
 
                 $marca = Asistencia::find($asis->id);
                 $marca->fecha_salida = Carbon::now();
-                $marca->tipo = $request->tipo;
+                $marca->tipo = 1;
                 $marca->ip_salida = $request->ip();
                 $marca->image_salida = $fileName;
                 $marca->latitude_salida = $request->latitude;
@@ -123,7 +122,7 @@ class AsistenciaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //try{
+        try{
         $asis = Asistencia::find($id);
         $asis->note = $request->note;
         $asis->sistema = $request->sistema;
@@ -140,10 +139,10 @@ class AsistenciaController extends Controller
         toastr()->success('¡Se ha actualizado exitosamente!');
         return redirect()->back();
 
-        /*}catch (\Exception $e){
+        }catch (\Exception $e){
            toastr()->success('¡Ocurrió un problema!');
            return redirect()->back();
-        }*/
+        }
     }
 
 

@@ -84,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="text-left"><b>Última Marca: </b>{{$asistencia->fecha ?? null }}</p>
+                <p class="text-left"><b>Última Marca: </b>@if($asistencia->tipo == 0){{$asistencia->fecha ?? null }} @else {{$asistencia->fecha_salida ?? null }} @endif</p>
                 <p class="text-left"><b>Tipo de Marca:</b>@if(isset($asistencia->tipo))@if($asistencia->tipo == 0) Entrada @else Salida @endif @endif</p>
                 <p class="text-left"><b>IP: </b>{{$asistencia->ip ?? null }}</p>
                 <input type="hidden" value="{{ Auth::user()->id }}" id="user_id">
@@ -130,6 +130,14 @@
     hora = momentoActual.getHours()
     minuto = momentoActual.getMinutes()
     segundo = momentoActual.getSeconds()
+
+    if(minuto < 10){
+        minuto = '0'+minuto;
+    }
+
+    if(segundo < 10){
+        segundo = '0'+segundo;
+    }
 
     horaImprimible = hora + " : " + minuto + " : " + segundo
 

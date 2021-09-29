@@ -102,7 +102,12 @@ $(document).ready(function() {
     $('#mydatatable thead tr').clone(true).appendTo( '#mydatatable thead' );
             $('#mydatatable thead tr:eq(1) th').each( function (i) {
                 var title = $(this).text();
-                $(this).html( '<input type="text" class="form-control" placeholder="'+title+'" />' );
+                if(i == 3 || i == 5 || i == 8){
+                    $(this).html( '<input type="text" class="form-control" placeholder="'+title+'" />' );
+                }else{
+                    $(this).html( '<input type="text" class="form-control" placeholder="'+title+'" readonly />' );
+                }
+
                 $( 'input', this ).on( 'keyup change', function () {
                     if ( table.column(i).search() !== this.value ) {
                         table.column(i).search( this.value ).draw();

@@ -24,7 +24,7 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
- 
+
     /**
      * Show the application dashboard.
      *
@@ -33,8 +33,9 @@ class HomeController extends Controller
     public function index()
     {
          $asistencia = Asistencia::where('id_user',Auth::user()->id)->latest('id')->first();
+         //dd($asistencia);
          return view('pages.dashboard1',compact('asistencia'));
-    } 
-    
-} 
+    }
+
+}
 
