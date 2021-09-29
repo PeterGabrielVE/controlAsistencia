@@ -29,16 +29,32 @@ MARCAS</h1>
                             <div class="col-4">
                                 <h6> MARCA </h6>
                             </div>
+                        </div>
+                        <div class="row">
 
-                            <div class="form-group col-4 m-0" id="ingreso_max_group">
-
-                                {!! Form::text('sistema', $asistencia->fecha ?? null, ['class'=>'form-control r-0 light s-12','readonly']) !!}
-                                <span class="ingreso_span"></span>
+                            <div class="form-group col-3 m-0">
+                                {!! Form::label('nombre', 'Nombre y Apellido', ['class'=>'col-form-label s-12']) !!}
+                                {!! Form::text('nombre', $asistencia->user->fullname .' '.$asistencia->user->last_name ?? null, ['class'=>'form-control r-0 light s-12','readonly']) !!}
                             </div>
-                            <div class="form-group col-4 m-0" id="ingreso_max_group">
-
-                                {!! Form::text('sistema', $asistencia->fecha_salida ?? null, ['class'=>'form-control r-0 light s-12','readonly']) !!}
-                                <span class="ingreso_span"></span>
+                            <div class="form-group col-3 m-0">
+                                {!! Form::label('identification', 'Identificación', ['class'=>'col-form-label s-12']) !!}
+                                {!! Form::text('identification', $asistencia->user->rut ?? null, ['class'=>'form-control r-0 light s-12','readonly']) !!}
+                            </div>
+                            <div class="form-group col-3 m-0">
+                                {!! Form::label('grupo', 'Grupo', ['class'=>'col-form-label s-12']) !!}
+                                {!! Form::text('grupo', $asistencia->user->grupo->group->group ?? null, ['class'=>'form-control r-0 light s-12','readonly']) !!}
+                            </div>
+                            <div class="form-group col-3 m-0">
+                                {!! Form::label('sistema', 'Sistema', ['class'=>'col-form-label s-12']) !!}
+                                {!! Form::text('sistema', $asistencia->sistema ?? null, ['class'=>'form-control r-0 light s-12','readonly']) !!}
+                            </div>
+                            <div class="form-group col-4 m-0">
+                                {!! Form::label('sistema', 'IP Entrada', ['class'=>'col-form-label s-12']) !!}
+                                {!! Form::text('ip_entrada', $asistencia->ip ?? null, ['class'=>'form-control r-0 light s-12','readonly']) !!}
+                            </div>
+                            <div class="form-group col-4 m-0">
+                                {!! Form::label('sistema', 'IP Salida', ['class'=>'col-form-label s-12']) !!}
+                                {!! Form::text('ip_salida', $asistencia->ip_salida ?? null, ['class'=>'form-control r-0 light s-12','readonly']) !!}
                             </div>
                         </div>
 
@@ -48,18 +64,13 @@ MARCAS</h1>
                     <form action="{{ route('asistencia.update',$asistencia->id) }}" method="POST">
                     <div class="row">
                         @csrf
-                            <div class="form-group col-6 m-0" id="ingreso_max_group">
-                                {!! Form::label('horas_trabajo', 'Sistema', ['class'=>'col-form-label s-12']) !!}
-                                {!! Form::text('sistema', $asistencia->sistema ?? null, ['class'=>'form-control r-0 light s-12','id'=>'horas_trabajo']) !!}
-                                <span class="ingreso_span"></span>
-                            </div>
                             <div class="form-group col-3 m-0" id="ingreso_max_group">
-                                {!! Form::label('horas_trabajo', 'Fecha Entrada', ['class'=>'col-form-label s-12']) !!}
+                                {!! Form::label('horas_trabajo', 'Fecha y Hora de Entrada', ['class'=>'col-form-label s-12']) !!}
                                 {!! Form::text('fecha', Carbon\Carbon::parse($asistencia->fecha)->format('d-m-Y H:i:s') ?? null, ['class'=>'form-control r-0 light s-12','id'=>'fecha']) !!}
                                 <span class="ingreso_span"></span>
                             </div>
                             <div class="form-group col-3 m-0" id="ingreso_max_group">
-                                {!! Form::label('horas_trabajo', 'Fecha Salida', ['class'=>'col-form-label s-12']) !!}
+                                {!! Form::label('horas_trabajo', 'Fecha y Hora de Salida', ['class'=>'col-form-label s-12']) !!}
                                 {!! Form::text('fecha_salida', Carbon\Carbon::parse($asistencia->fecha_salida)->format('d-m-Y H:i:s') ?? null, ['class'=>'form-control r-0 light s-12','id'=>'fecha_salida']) !!}
                                 <span class="ingreso_span"></span>
                             </div>

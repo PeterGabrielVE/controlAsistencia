@@ -125,7 +125,6 @@ class AsistenciaController extends Controller
         try{
         $asis = Asistencia::find($id);
         $asis->note = $request->note;
-        $asis->sistema = $request->sistema;
 
         $date = DateTime::createFromFormat('d-m-Y H:i:s', $request->fecha);
         $date = $date->format('Y-m-d H:i:s');
