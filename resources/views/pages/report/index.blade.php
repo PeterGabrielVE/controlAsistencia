@@ -38,7 +38,7 @@ MARCAS</h1>
                             </div>
                         </div>
                     {{-- </div> --}}
-                    <div id="table" class=" table-responsive">
+                    <div id="table" class="table-responsive" style="overflow-x:auto;">
                     <table id="mydatatable" class="table table-bordered table-hover table-sm text-12" data-page-length='10' style="font-size:14px;">
                             <thead>
                                 <tr>
@@ -46,10 +46,7 @@ MARCAS</h1>
                                     <th><b>IDENTIFICACIÓN</b></th>
                                     <th><b>GRUPO</b></th>
                                     <th><b>ENTRADA</b></th>
-                                    <th><b>DIRECCIÓN IP</b></th>
                                     <th><b>SALIDA</b></th>
-                                    <th><b>DIRECCIÓN IP</b></th>
-                                    <th><b>SISTEMA</b></th>
                                     <th><b>NOTA</b></th>
                                     <th></th>
                                 </tr>
@@ -62,10 +59,7 @@ MARCAS</h1>
                                     <td>{{ $a->user->rut ?? null }}</td>
                                     <td>{{ $a->user->grupo->group->group ?? null}}</td>
                                     <td>{{ Carbon\Carbon::parse($a->fecha)->format('d-m-Y h:i:s A') ?? null }}</td>
-                                    <td>{{ $a->ip ?? null }}</td>
                                     <td>@if(isset($a->fecha_salida)){{ Carbon\Carbon::parse($a->fecha_salida)->format('d-m-Y h:i:s A') }} @endif</td>
-                                    <td>{{ $a->ip_salida ?? null }}</td>
-                                    <td>{{ $a->sistema ?? null }}</td>
                                     <td>{{ $a->note ?? null }}</td>
                                     <td class="text-center">
                                         {!! Form::open(['route'=>['asistencia.destroy',$a->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
