@@ -32,10 +32,11 @@
                 <input type="hidden" value="0" name="longitude" id="lngval">
                 <input type="hidden" value="0" name="latitude" id="latval">
                 <input type="hidden" name="image" class="image-tag">
+                <input type="hidden"  name="note" id="nota">
                 <a id="btnCamara" class="btn btn-success">Abrir Camara</a>
                 <a id="btnOcultarCamara" class="btn btn-info" style="display:none;">Cerrar Camara</a>
                 <a id="checker" class="btn btn-warning" style="display:none;">Tomar foto</a>
-               
+
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

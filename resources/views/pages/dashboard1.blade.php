@@ -84,11 +84,17 @@
                         </div>
                     </div>
                 </div>
+
                 <p class="text-left"><b>Última Marca: </b>@if($asistencia->tipo == 0){{$asistencia->fecha ?? null }} @else {{$asistencia->fecha_salida ?? null }} @endif</p>
                 <p class="text-left"><b>Tipo de Marca:</b>@if(isset($asistencia->tipo))@if($asistencia->tipo == 0) Entrada @else Salida @endif @endif</p>
                 <p class="text-left"><b>IP: </b>{{$asistencia->ip ?? null }}</p>
                 <input type="hidden" value="{{ Auth::user()->id }}" id="user_id">
                 </div>
+                @isset($asistencia)
+                    @if($asistencia->tipo == 0)
+                        <textarea name="note" class="col-12 form-control" id="note" placeholder="Ingrese Nota" rows="3"></textarea>
+                    @endif
+                @endisset
 
                 <div class="footer text-left">
                         <p>Para registrar asistencia presione el botón abajo.
@@ -150,6 +156,7 @@
 
     function mostrarAsistencia() {
        $('#create').modal('show');
+       $('#nota').val($('#note').val());
     }
 
     $(document).ready(function(){

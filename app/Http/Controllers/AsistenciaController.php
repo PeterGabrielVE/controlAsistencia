@@ -73,6 +73,7 @@ class AsistenciaController extends Controller
                 $marca = Asistencia::find($asis->id);
                 $marca->fecha_salida = Carbon::now();
                 $marca->tipo = 1;
+                $marca->note= $request->note;
                 $marca->ip_salida = $request->ip();
                 $marca->image_salida = $fileName;
                 $marca->latitude_salida = $request->latitude;
