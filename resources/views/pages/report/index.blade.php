@@ -48,7 +48,9 @@ MARCAS</h1>
                                     <th><b>ENTRADA</b></th>
                                     <th><b>SALIDA</b></th>
                                     <th><b>NOTA</b></th>
-                                    <th></th>
+                                    @if(Auth::user()->hasRole('super'))
+                                        <th></th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody id="tbody">
@@ -61,7 +63,9 @@ MARCAS</h1>
                                     <td>{{ Carbon\Carbon::parse($a->fecha)->format('d-m-Y h:i:s A') ?? null }}</td>
                                     <td>@if(isset($a->fecha_salida)){{ Carbon\Carbon::parse($a->fecha_salida)->format('d-m-Y h:i:s A') }} @endif</td>
                                     <td>{{ $a->note ?? null }}</td>
+                                    @if(Auth::user()->hasRole('super'))
                                     <td class="text-center">
+
                                         {!! Form::open(['route'=>['asistencia.destroy',$a->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
                                             <a target="_blank" href="{{ route('asistencia.show',$a->id) }}" class="btn btn-default btn-sm" title="Mostrar">
                                                 <i class="icon-eye text-info"></i>
@@ -71,9 +75,11 @@ MARCAS</h1>
                                             </a>
                                             <button class="btn btn-default btn-sm" onclick="return confirm('¿Realmente deseas borrar el registro?')">
                                                     <i class="icon-trash-can3 text-danger"></i>
-                                                </button>
-                                                {!! Form::close() !!}
+                                            </button>
+                                            {!! Form::close() !!}
+
                                     </td>
+                                    @endif
                                 </tr>
                                 @endif
 

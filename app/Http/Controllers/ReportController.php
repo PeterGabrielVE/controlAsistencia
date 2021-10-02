@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Asistencia;
 use App\Models\Assignment;
@@ -101,5 +102,11 @@ class ReportController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function report_asistencia()
+    {
+        $asistencia = Asistencia::where('id_user', Auth::user()->id)->orderBy('fecha','DESC')->get();
+        return view('pages.report.index',compact('asistencia'));
     }
 }

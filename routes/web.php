@@ -74,6 +74,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('check_date_assign', 'PlannerController@check_date')->name('check_date_assign');
 
     Route::get('reporte/jornada', 'ReportController@report_jornada')->name('report.jornada');
+    Route::get('reporte/marcas', 'ReportController@report_asistencia')->name('reporte/marcas');
 
 
 });
