@@ -68,7 +68,7 @@ JORNADA</h1>
                                                     <td> @isset($a->turno){{ check_turn($i,$a->turno) }} @endif</td>
                                                     <td>@if($a->fecha_entrada != ''){{ Carbon\Carbon::parse($a->fecha_entrada)->format('g:i:s A') ?? null }} @endif </td>
                                                     <td>@if($a->fecha_entrada != ''  && $a->fecha_entrada != null){{ obtener_atraso($i,$a->turno,$a->fecha_entrada) ?? null }} @endif </td>
-                                                    <td>@if($a->marca != '' && $a->marca != null){{ obtener_salida($a->marca) }} @endif </td>
+                                                    <td>@if(isset($a->marca) && $a->marca != '' && $a->marca != null){{ obtener_salida($a->marca) }} @endif </td>
                                                 </tr>
 
                                             @endif
