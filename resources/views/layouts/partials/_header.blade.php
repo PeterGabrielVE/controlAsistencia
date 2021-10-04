@@ -28,11 +28,11 @@
                 <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Dashboard') }}</span></a>
           </li>
         @endif
-        @if(!Auth::user()->hasRole('super'))
+
         <li class="treeview"><a href="{{ route('reporte/marcas') }}">
               <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Reporte de Marcas') }}</span></a>
         </li>
-      @endif
+
     @if(Auth::user()->hasRole('super'))
 
         <li class="header light mt-3"><strong>CONFIGURACIÓN</strong></li>
