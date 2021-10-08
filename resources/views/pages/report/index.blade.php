@@ -25,11 +25,6 @@ MARCAS</h1>
     <div class="container-fluid animatedParent animateOnce my-3">
         <div class="animated fadeInUpShort">
             <div class="card">
-                <div class="form-group">
-                    <div class="card-header white">
-                        <h6> LISTA DE MARCAS </h6>
-                    </div>
-                </div>
                 <div class="card-body">
                     {{-- <div class="row text-right"> --}}
                         <div class="col-md-12 text-right">
@@ -39,7 +34,7 @@ MARCAS</h1>
                         </div>
                     {{-- </div> --}}
                     <div id="table" class="table-responsive" style="overflow-x:auto;">
-                    <table id="mydatatable" class="table table-bordered table-hover table-sm text-12" data-page-length='10' style="font-size:14px;">
+                    <table id="mydatatable" class="table table-bordered table-hover table-sm text-12" data-page-length='100' style="font-size:14px;width: 100%;border-collapse: collapse;">
                             <thead>
                                 <tr>
                                     <th><b>NOMBRE</b></th>
@@ -118,7 +113,7 @@ $(document).ready(function() {
                    buttons: ['excel'],
                    info:true,
                    bLengthChange: true,
-                   lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
+                   lengthMenu: [[5, 10, 25, 50,100, -1], [5, 10, 25, 50,100, "Todos"]],
                    order: [],
                    language: {
                        "decimal": "",

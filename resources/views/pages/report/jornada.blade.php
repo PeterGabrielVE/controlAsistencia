@@ -25,11 +25,7 @@ JORNADA</h1>
     <div class="container-fluid animatedParent animateOnce my-3">
         <div class="animated fadeInUpShort">
             <div class="card">
-                <div class="form-group">
-                    <div class="card-header white">
-                        <h6> LISTA DE MARCAS </h6>
-                    </div>
-                </div>
+
                 <div class="card-body">
                     {{-- <div class="row text-right"> --}}
                         <div class="col-md-12 text-right">
@@ -38,8 +34,8 @@ JORNADA</h1>
                             </div>
                         </div>
                     {{-- </div> --}}
-                    <div id="table" class=" table-responsive">
-                    <table id="mydatatable" class="table table-bordered table-hover table-sm text-12" data-page-length='10' style="font-size:14px;">
+                    <div id="table" class="m-auto table-responsive">
+                    <table id="mydatatable" class="table table-bordered table-hover table-sm text-12" data-page-length='100' style="font-size:14px; width: 100%;border-collapse: collapse;">
                             <thead>
                                 <tr>
                                     <th><b>FECHA</b></th>
@@ -66,9 +62,13 @@ JORNADA</h1>
                                                     <td>{{ $a->first_name }} {{ $a->last_name }}</td>
                                                     <td>{{ $a->rut }}</td>
                                                     <td> @isset($a->turno){{ check_turn($i,$a->turno) }} @endif</td>
-                                                    <td>@if($a->fecha_entrada != ''){{ Carbon\Carbon::parse($a->fecha_entrada)->format('g:i:s A') ?? null }} @endif </td>
+                                                    <td>@if($a->fecha_entrada != '')<a target="_blank" href="{{ route('asistencia.show',$a->marca) }}" title="Mostrar">
+                                                        {{ Carbon\Carbon::parse($a->fecha_entrada)->format('g:i:s A') ?? null }}
+                                                    </a> @endif </td>
                                                     <td>@if($a->fecha_entrada != ''  && $a->fecha_entrada != null){{ obtener_atraso($i,$a->turno,$a->fecha_entrada) ?? null }} @endif </td>
-                                                    <td>@if(isset($a->marca) && $a->marca != '' && $a->marca != null){{ obtener_salida($a->marca) }} @endif </td>
+                                                    <td>@if(isset($a->marca) && $a->marca != '' && $a->marca != null)<a target="_blank" href="{{ route('asistencia.show',$a->marca) }}" title="Mostrar">
+                                                        {{ obtener_salida($a->marca) }}
+                                                    </a>@endif </td>
                                                 </tr>
 
                                             @endif
@@ -109,7 +109,7 @@ $(document).ready(function() {
                    buttons: ['excel'],
                    info:true,
                    bLengthChange: true,
-                   lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
+                   lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100,"Todos"]],
                    order: [],
                    language: {
                        "decimal": "",
@@ -130,7 +130,13 @@ $(document).ready(function() {
                            "next": "Siguiente",
                            "previous": "Anterior"
                        }
-                   }
+                   },
+                   buttons: [
+                        {
+                            extend: 'excel',
+                            text: 'Exportar excel'
+                        }
+                    ],
                } );
 
    });
