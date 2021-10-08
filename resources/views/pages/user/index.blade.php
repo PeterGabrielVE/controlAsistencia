@@ -15,7 +15,7 @@
     <div>
         @include('alerts.toastr')
     </div>
-    
+
     <div class="container-fluid animatedParent animateOnce my-3">
         <div class="animated fadeInUpShort">
             <div class="card">
@@ -25,13 +25,13 @@
                             <div class="col-sm-10" style="margin-top: 5px;">
                                 <h6> {{ __('LISTA USUARIOS') }} </h6>
                             </div>
-                          
-                        </div> 
+
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div id="table" class=" table-responsive">
-                        <table id="example3" class="table table-bordered table-hover table-sm" data-order='[[ 0, "desc" ]]' data-page-length='100'>
+                        <table id="example3" class="table table-bordered table-hover table-sm" data-order='[[ 0, "desc" ]]' data-page-length='100' style="width: 100%;border-collapse: collapse;">
                             <thead>
                                 <tr>
                                     <th class="text-center" style="display:none;"><b>#</b></th>
@@ -56,9 +56,9 @@
                                         @else
                                         <a class="avatar avatar-lg">
                                             {{ Html::image('img/avatar/default.png', 'a picture', array('alt'=>'Logo','class'=>'img-responsive')) }}
-                                        </a>   
+                                        </a>
                                         @endif
-                                       
+
                                     </td>
                                     <td class="text-center"> {{ $user->fullname }} </td>
                                     <td class="text-center"> {{ $user->last_name ?? null }} </td>
@@ -78,7 +78,7 @@
                                         <span class="icon icon-circle s-12  mr-2 text-warning"></span> {{ $user->estado->name ?? '' }} </td>
                                         @endif
                                     </td>
-                                    
+
                                     <td class="text-center">
                                         <a href="{{ route('user.show',$user->id) }}" class="btn btn-default btn-sm" title="Editar">
                                             <i class="icon-pencil text-info"></i>

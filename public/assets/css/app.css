@@ -36949,3 +36949,14 @@ html[dir=rtl] .form-group.has-icon input {
 .kv-file-remove {
     display: none !important;
 }
+
+.enlace_marca{
+    text-decoration: underline;
+    color: #0645AD;
+}
+
+
+div.dt-buttons{
+    position:relative !important;
+    float:right !important;
+}

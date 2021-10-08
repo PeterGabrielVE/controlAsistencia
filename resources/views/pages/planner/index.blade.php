@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row text-right"> 
+                    <div class="row text-right">
                         <div class="col-md-12 text-right">
                             <div class="form-group">
                             <div class="dropdown">
@@ -38,7 +38,7 @@
                     </div>
                     <div id="table" class=" table-responsive">
                     <table id="mydatatable" class="table table-bordered table-hover table-sm"
-                                data-order='[[ 0, "desc" ]]' data-page-length='10'>
+                                data-order='[[ 0, "desc" ]]' data-page-length='100' style="width: 100%;border-collapse: collapse;">
                             <thead>
                                 <tr>
                                     <th><b>DESCRIPCIÓN</b></th>
@@ -86,7 +86,7 @@ $(document).ready(function() {
                 buttons: [],
                 info:true,
                 bLengthChange: true,
-                lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]],
+                lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "Todos"]],
                 order: [[7, 'desc']],
                 language: {
                     "decimal": "",

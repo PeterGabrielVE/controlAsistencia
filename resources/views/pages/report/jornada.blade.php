@@ -44,7 +44,7 @@ JORNADA</h1>
                                     <th><b>NOMBRE</b></th>
                                     <th><b>IDENTIFICACIÓN</b></th>
                                     <th><b>TURNO</b></th>
-                                    <th><b>ENTRÓ</b></th>
+                                    <th><b>ENTRADA</b></th>
                                     <th><b>ATRASO</b></th>
                                     <th><b>SALIDA</b></th>
                                 </tr>
@@ -62,11 +62,11 @@ JORNADA</h1>
                                                     <td>{{ $a->first_name }} {{ $a->last_name }}</td>
                                                     <td>{{ $a->rut }}</td>
                                                     <td> @isset($a->turno){{ check_turn($i,$a->turno) }} @endif</td>
-                                                    <td>@if($a->fecha_entrada != '')<a target="_blank" href="{{ route('asistencia.show',$a->marca) }}" title="Mostrar">
+                                                    <td>@if($a->fecha_entrada != '')<a target="_blank" href="{{ route('asistencia.edit',$a->marca) }}" class="enlace_marca" title="Mostrar">
                                                         {{ Carbon\Carbon::parse($a->fecha_entrada)->format('g:i:s A') ?? null }}
                                                     </a> @endif </td>
                                                     <td>@if($a->fecha_entrada != ''  && $a->fecha_entrada != null){{ obtener_atraso($i,$a->turno,$a->fecha_entrada) ?? null }} @endif </td>
-                                                    <td>@if(isset($a->marca) && $a->marca != '' && $a->marca != null)<a target="_blank" href="{{ route('asistencia.show',$a->marca) }}" title="Mostrar">
+                                                    <td>@if(isset($a->marca) && $a->marca != '' && $a->marca != null)<a target="_blank"  class="enlace_marca" href="{{ route('asistencia.edit',$a->marca) }}" title="Mostrar">
                                                         {{ obtener_salida($a->marca) }}
                                                     </a>@endif </td>
                                                 </tr>
