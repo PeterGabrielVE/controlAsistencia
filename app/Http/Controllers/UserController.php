@@ -48,7 +48,7 @@ class UserController extends Controller
         $grupos = Group::get()->pluck('group', 'id')->prepend('Seleccione...','');
         $users = $this->user->all();
 
-        return view('pages.user.index', compact('users','status','roles','positions','grupos'));  
+        return view('pages.user.index', compact('users','status','roles','positions','grupos'));
     }
 
     /**
@@ -73,7 +73,7 @@ class UserController extends Controller
         $data = $request->all();
 
         $file = $request->file('file');
-         
+
         if ($file != null) {
             // url file save
             $path = public_path().'/img/avatar/';
@@ -120,7 +120,7 @@ class UserController extends Controller
         $status = UsersStatus::get()->pluck('name', 'id')->prepend('Seleccione...','');
         $positions = Position::get()->pluck('name', 'id')->prepend('Seleccione...','');
         $grupos = Group::get()->pluck('group', 'id')->prepend('Seleccione...','');
-        return view('pages.user.edit_user', compact('user','status','roles','positions','grupos'));  
+        return view('pages.user.edit_user', compact('user','status','roles','positions','grupos'));
     }
 
     /**
@@ -153,7 +153,7 @@ class UserController extends Controller
             $file->move($path, $fileName);
             $data = array_add($data, 'image', $fileName);
         }
-       
+
         if($data['password'] == $data['password_confirmation']){
              if (isset($data['password'])) {
                 $data = array_set($data, 'password', bcrypt($data['password']));
@@ -161,7 +161,7 @@ class UserController extends Controller
             }else{
                 $data = array_except($data, ['password']);
                 $user->update($data);
-            }   
+            }
             $user->save();
             toastr()->success('¡Se ha actualizado exitosamente!');
             $user->syncRoles($data['rol']);
@@ -173,16 +173,16 @@ class UserController extends Controller
             }else{
                 DB::insert('insert into users_groups (id_user, id_group) values (?, ?)', [$id, $request->id_group]);
             }
-           
+
             Session::flash('message-success',' User '. $request->fullname.' editado correctamente.');
             return Redirect::back();
-          
+
         }else{
             Session::flash('message-error','No coinciden la contraseña y la confirmación.');
             return Redirect::back()->withInput();
         }
-        
-       
+
+
     }
 
     /**
@@ -229,18 +229,21 @@ class UserController extends Controller
         Session::flash('message-success',' User '. $user->fullname.' actualizado correctamente.');
     }
 
-       public function getEdificio($id)
+       public function getGroup($id)
     {
-        $data = DB::table('adm_usuarios_edificios')->where('id_usuario','=',$id)->get();
-        //dd($data);
+        $data = DB::table('groups_users')
+        ->leftjoin('groups','groups_users.id_group','groups.id')
+        ->select('groups.id','groups.group as name')
+        ->where('groups_users.id_user','=',$id)
+        ->get();
         $result = [];
         foreach ($data as $key => $each) {
         $result[] = [
-            'id_edificio' => $each->id_edificio,
-            'edificio' => $this->obtenerNombre($each->id_edificio)
+            'id_group' => $each->id,
+            'group' => $each->name
             ];
         }
-        //dd($result);
+
          return datatables()->of($result)->toJson();
 
     }
@@ -251,28 +254,28 @@ class UserController extends Controller
         return $data;
     }
 
-    public function agregaEdificioUser(Request $request){
+    public function addGroupUser(Request $request){
 
-        $user = DB::insert('insert into adm_usuarios_edificios (id_usuario, id_edificio) values (?, ?)', [$request->id_usuario, $request->id_edificio]);
+        $user = DB::insert('insert into groups_users(id_user, id_group) values (?, ?)', [$request->id_usuario, $request->id_grupo]);
     }
 
-    public function eliminaEdificioUser(Request $request){
+    public function deleteGroupUser(Request $request){
 
-        $user = DB::table('adm_usuarios_edificios')->where('id_usuario', $request->id_usuario)->where('id_edificio', $request->id_edificio)->delete();
+        $user = DB::table('groups_users')->where('id_user', $request->id_usuario)->where('id_group', $request->id_grupo)->delete();
     }
 
-    public function obtenerEdificioUser(Request $request){
-       
-        $edificios = DB::table('adm_usuarios_edificios')->where('id_usuario','=',$request->id_usuario)->pluck('id_edificio');
-        $building = Building::whereNotIn('id',$edificios)->get()->pluck('name', 'id');
-        return response()->json($building);  
+    public function getGroupUser(Request $request){
+
+        $grupos = DB::table('groups_users')->where('id_user','=',$request->id_usuario)->pluck('id_group');
+        $groups = Grupo::whereNotIn('id',$grupos)->get()->pluck('name', 'id');
+        return response()->json($groups);
     }
 
      public function obtenerEmpresaUser(Request $request){
-       
+
         $empresas = DB::table('adm_usuarios_empresas_ext')->where('id_usuario','=',$request->id_usuario)->pluck('id_empresa');
         $empresa = Empresa_Externa::whereNotIn('id',$empresas)->get()->pluck('nombre', 'id');
-        return response()->json($empresa);  
+        return response()->json($empresa);
     }
 
     public function agregaEmpresaUser(Request $request){
@@ -308,10 +311,10 @@ class UserController extends Controller
     }
 
     public function obtenerAdministracionUser(Request $request){
-       
+
         $administraciones = DB::table('adm_usuarios_administraciones')->where('id_usuario','=',$request->id_usuario)->pluck('id_administracion');
         $administracion = Administracion::whereNotIn('id',$administraciones)->get()->pluck('nombre', 'id');
-        return response()->json($administracion);  
+        return response()->json($administracion);
     }
 
     public function agregaAdministracionUser(Request $request){
@@ -322,7 +325,7 @@ class UserController extends Controller
      public function getAdministracion($id)
     {
         $data = DB::table('adm_usuarios_administraciones')->where('id_usuario','=',$id)->get();
-    
+
         $result = [];
         foreach ($data as $key => $each) {
         $result[] = [
@@ -371,10 +374,10 @@ class UserController extends Controller
     }
 
      public function obtenerCorredorUser(Request $request){
-       
+
         $corredores = DB::table('adm_usuarios_corredores')->where('id_usuario','=',$request->id_usuario)->pluck('id_corredor');
         $corredor = Corredor::whereNotIn('id',$corredores)->get()->pluck('nombre', 'id');
-        return response()->json($corredor);  
+        return response()->json($corredor);
     }
 
       public function eliminaCorredorUser(Request $request){

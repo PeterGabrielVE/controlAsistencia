@@ -76,6 +76,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('reporte/jornada', 'ReportController@report_jornada')->name('report.jornada');
     Route::get('reporte/marcas', 'ReportController@report_asistencia')->name('reporte/marcas');
 
+    Route::post('agregaGroupUser', 'UserController@addGroupUser')->name('agregaGroupUser');
+    Route::get('groupByUser/{id}','UserController@getGroup');
+    Route::post('deleteGroupUser','UserController@deleteGroupUser');
+	Route::get("getGroupUser", "UserController@getGroupUser")->name("getGroupUser");
+
 
 });
 
