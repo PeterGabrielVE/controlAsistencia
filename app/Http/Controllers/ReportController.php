@@ -113,7 +113,16 @@ class ReportController extends Controller
     public function report_empleados()
     {
 
-        $asistencia = Asistencia::where('id_user', Auth::user()->id)->orderBy('fecha','DESC')->get();
+        $grupos = DB::table('groups_users')->where('id_user', Auth::user()->id)->pluck('id_group');
+        //d($grupos);
+        $asistencia = Asistencia::leftjoin('users as us','asistencias.id_user','us.id')
+                    ->leftjoin('users_groups as ug','us.id','ug.id_user')
+                    ->leftjoin('groups as gr','ug.id_group','gr.id')
+                    ->select('asistencias.*')
+                    ->whereIn('id_group',$grupos)
+                    ->orderBy('asistencias.fecha','DESC')
+                    ->get();
+        dd($asistencia);
         return view('pages.report.index',compact('asistencia'));
     }
 }
