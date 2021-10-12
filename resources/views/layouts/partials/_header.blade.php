@@ -33,6 +33,12 @@
               <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Reporte de Marcas') }}</span></a>
         </li>
 
+        @if(Auth::user()->hasRole('jefe') || Auth::user()->hasRole('supervisor'))
+          <li class="treeview"><a href="{{url('reporte/empleados')}}">
+                <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Reporte Empleados') }}</span></a>
+          </li>
+        @endif
+
     @if(Auth::user()->hasRole('super'))
 
         <li class="header light mt-3"><strong>CONFIGURACIÓN</strong></li>

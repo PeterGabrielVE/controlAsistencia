@@ -109,4 +109,11 @@ class ReportController extends Controller
         $asistencia = Asistencia::where('id_user', Auth::user()->id)->orderBy('fecha','DESC')->get();
         return view('pages.report.index',compact('asistencia'));
     }
+
+    public function report_empleados()
+    {
+
+        $asistencia = Asistencia::where('id_user', Auth::user()->id)->orderBy('fecha','DESC')->get();
+        return view('pages.report.index',compact('asistencia'));
+    }
 }
