@@ -122,7 +122,7 @@ class ReportController extends Controller
                     ->whereIn('id_group',$grupos)
                     ->orderBy('asistencias.fecha','DESC')
                     ->get();
-        dd($asistencia);
+        //dd($asistencia);
         return view('pages.report.index',compact('asistencia'));
     }
 }
