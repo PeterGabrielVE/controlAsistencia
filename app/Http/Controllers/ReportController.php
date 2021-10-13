@@ -125,4 +125,33 @@ class ReportController extends Controller
 
         return view('pages.report.index',compact('asistencia'));
     }
+
+    public function report_jornada_by_rol(){
+
+        ini_set('max_execution_time', 300);
+        set_time_limit(0);
+        $asistencia = DB::table('jornada')->get();
+
+        $grupos = DB::table('groups_users')->where('id_user', Auth::user()->id)->pluck('id_group');
+
+        $asistencia = DB::table('jornada')
+                    ->leftjoin('users as us','jornada.usuario','us.id')
+                    ->leftjoin('users_groups as ug','us.id','ug.id_user')
+                    ->leftjoin('groups as gr','ug.id_group','gr.id')
+                    ->select('jornada.*')
+                    ->whereIn('ug.id_group',$grupos)
+                    ->orderBy('jornada.fecha','DESC')
+                    ->get();
+
+
+
+        $primer = DB::table('jornada')->first();
+        $ultimo = DB::table('jornada')->orderBy('fecha', 'desc')->first();
+        $inicio = strtotime($primer->fecha);
+        $final = strtotime($ultimo->fecha."+ 1 days");
+
+        //dd($asistencia);
+
+        return view('pages.report.jornada',compact('asistencia','inicio','final'));
+    }
 }

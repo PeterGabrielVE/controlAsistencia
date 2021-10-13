@@ -28,29 +28,18 @@
         <!--Top Menu Start -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-              
+
                 <!-- User Account-->
                 <li class="dropdown custom-dropdown user user-menu ">
                    <a href="#" class="nav-link" data-toggle="dropdown">
                         {{ Html::image('assets/img/dummy/u1.png', 'a picture', array('class'=>'user-image','alt'=>'a picture')) }}
-                       
+
                         <i class="icon-more_vert "></i>
                     </a>
                     <div class="dropdown-menu p-4 dropdown-menu-right">
-                       
-                        
+
+
                         <div class="row box justify-content-between my-4">
-                              @if((Auth::user()->hasRole('mayor')))
-                                <div class="col">
-                                  
-                                    <a href="{{ route('home') }}">
-                                        <i class="icon-refresh green lighten-1 avatar  r-5"></i>
-                                        {{ Auth::user()->rol }}
-                                        <div class="pt-1">{{ __('Cambiar Edificio') }}</div>
-                                    </a>
-                                   
-                                </div>
-                             @endif
                             <div class="col"><a href="{{ route('passwordReset') }}">
                                 <i class="icon-beach_access pink lighten-1 avatar  r-5"></i>
                                 <div class="pt-1">{{ __('Perfil') }}</div>
@@ -64,7 +53,7 @@
                                     {{ csrf_field() }}
                                 </form>
                             </div>
-                            
+
                         </div>
                     </div>
                 </li>

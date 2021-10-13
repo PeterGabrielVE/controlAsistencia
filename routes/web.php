@@ -76,6 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('reporte/jornada', 'ReportController@report_jornada')->name('report.jornada');
     Route::get('reporte/marcas', 'ReportController@report_asistencia')->name('reporte/marcas');
     Route::get('reporte/empleados', 'ReportController@report_empleados')->name('reporte/empleados');
+    Route::get('reporte/jornada', 'ReportController@report_jornada_by_rol')->name('reporte/jornada');
 
     Route::post('agregaGroupUser', 'UserController@addGroupUser')->name('agregaGroupUser');
     Route::get('groupByUser/{id}','UserController@getGroup');

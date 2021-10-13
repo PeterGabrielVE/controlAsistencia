@@ -37,6 +37,9 @@
           <li class="treeview"><a href="{{url('reporte/empleados')}}">
                 <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Reporte Empleados') }}</span></a>
           </li>
+          <li class="treeview"><a href="{{url('reporte/jornada')}}">
+            <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Reporte Jornada') }}</span></a>
+      </li>
         @endif
 
     @if(Auth::user()->hasRole('super'))
