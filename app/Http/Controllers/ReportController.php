@@ -139,7 +139,7 @@ class ReportController extends Controller
                     ->leftjoin('users_groups as ug','us.id','ug.id_user')
                     ->leftjoin('groups as gr','ug.id_group','gr.id')
                     ->select('jornada.*')
-                    ->whereIn('gr.id_group',$grupos)
+                    ->whereIn('gr.id',$grupos)
                     ->orderBy('jornada.fecha','DESC')
                     ->get();
 
