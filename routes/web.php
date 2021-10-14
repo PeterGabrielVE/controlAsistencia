@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('turn', 'TurnController')->middleware('has.role:super');
 	Route::resource('typeTurn', 'TypeTurnController')->middleware('has.role:super');
 	Route::resource('planificador', 'PlannerController')->middleware('has.role:super');
-    Route::resource('asistencia', 'AsistenciaController')->middleware('has.role:super')->middleware('has.role:jefe');
+    Route::resource('asistencia', 'AsistenciaController');
 	// home
 	Route::get('/home', 'HomeController@index')->name('home');
 
@@ -61,7 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('asistencia/store', 'AsistenciaController@store')->name('asistencia.store');
 	Route::post('asistencia/update/{id}', 'AsistenciaController@update')->name('asistencia.update');
     Route::get('asistencia/show/{id}', 'AsistenciaController@show')->name('asistencia.show');
-    Route::get('asistencia/edit/{id}', 'AsistenciaController@edit')->name('asistencia.edit')->middleware('has.role:super')->middleware('has.role:jefe');
+    Route::get('asistencia/edit/{id}', 'AsistenciaController@edit')->name('asistencia.edit');
 
 	Route::get('planificador/create/{id}', 'PlannerController@create')->name('planificador.create');
 	Route::post('planificador/update/{id}', 'PlannerController@update')->name('planificador.update');
