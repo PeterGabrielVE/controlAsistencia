@@ -119,7 +119,10 @@ class UserController extends Controller
         $roles = $this->role->get()->pluck('name', 'slug')->prepend('Seleccione...','');
         $status = UsersStatus::get()->pluck('name', 'id')->prepend('Seleccione...','');
         $positions = Position::get()->pluck('name', 'id')->prepend('Seleccione...','');
-        $grupos = Group::get()->pluck('group', 'id')->prepend('Seleccione...','');
+
+        $groupUser = DB::table('groups_users')->where('id_user',$id)->pluck('id_group');
+        $grupos = Group::whereNotIn('id',$groupUser)->pluck('group', 'id')->prepend('Seleccione...','');
+
         return view('pages.user.edit_user', compact('user','status','roles','positions','grupos'));
     }
 
@@ -266,8 +269,9 @@ class UserController extends Controller
 
     public function getGroupUser(Request $request){
 
-        $grupos = DB::table('groups_users')->where('id_user','=',$request->id_usuario)->pluck('id_group');
-        $groups = Grupo::whereNotIn('id',$grupos)->get()->pluck('name', 'id');
+        $groupUser = DB::table('groups_users')->where('id_user',$request->id_usuario)->pluck('id_group');
+        $groups = Group::whereNotIn('id',$groupUser)->pluck('group', 'id')->prepend('Seleccione...','');
+
         return response()->json($groups);
     }
 
