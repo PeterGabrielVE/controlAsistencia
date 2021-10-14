@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController');
 	Route::resource('rol', 'RolController');
 	Route::resource('permission', 'PermissionController');
-	Route::resource('report', 'ReportController')->middleware('has.role:super');
+	Route::resource('report', 'ReportController')->middleware('has.role:super,supervisor,jefe');
 	Route::resource('turn', 'TurnController')->middleware('has.role:super');
 	Route::resource('typeTurn', 'TypeTurnController')->middleware('has.role:super');
 	Route::resource('planificador', 'PlannerController')->middleware('has.role:super');
