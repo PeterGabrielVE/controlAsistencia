@@ -23,11 +23,9 @@
         <ul class="sidebar-menu">
         <li class="header"><strong>LIBRO DE ASISTENCIA</strong></li>
 
-         @if(Auth::user()->hasRole('super') || Auth::user()->hasRole('user'))
           <li class="treeview"><a href="{{url('home')}}">
                 <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Dashboard') }}</span></a>
           </li>
-        @endif
 
         <li class="treeview"><a href="{{ route('reporte/marcas') }}">
               <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Reporte de Marcas') }}</span></a>

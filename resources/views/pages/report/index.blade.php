@@ -43,7 +43,7 @@ MARCAS</h1>
                                     <th><b>ENTRADA</b></th>
                                     <th><b>SALIDA</b></th>
                                     <th><b>NOTA</b></th>
-                                    @if(Auth::user()->hasRole('super'))
+                                    @if(Auth::user()->hasRole('super') || Auth::user()->hasRole('jefe')  || Auth::user()->hasRole('supervisor'))
                                         <th></th>
                                     @endif
                                 </tr>
@@ -58,7 +58,7 @@ MARCAS</h1>
                                     <td>{{ Carbon\Carbon::parse($a->fecha)->format('d-m-Y h:i:s A') ?? null }}</td>
                                     <td>@if(isset($a->fecha_salida)){{ Carbon\Carbon::parse($a->fecha_salida)->format('d-m-Y h:i:s A') }} @endif</td>
                                     <td>{{ $a->note ?? null }}</td>
-                                    @if(Auth::user()->hasRole('super'))
+                                    @if(Auth::user()->hasRole('super') || Auth::user()->hasRole('jefe')  || Auth::user()->hasRole('supervisor'))
                                     <td class="text-center">
 
                                         {!! Form::open(['route'=>['asistencia.destroy',$a->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
