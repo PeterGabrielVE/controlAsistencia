@@ -41,7 +41,7 @@
 
 
 </style>
-<script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/Webcam-easy/dist/webcam-easy.min.js"></script>
 <script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKA5z9mjBp51OKJ0Ub2rEZmOf2TDliAnk&libraries=places">
         </script>
 @section('title')
@@ -163,11 +163,11 @@
 
     var webCamElement = document.getElementById("webcam");
     var canvasElement = document.getElementById("canvas");
-    const webcam = new Webcam(webCamElement, 'user', canvasElement, null);
+    const Webcam = new Webcam(webCamElement, 'user', canvasElement, null);
 
     $('#btnCamara').click(function(){
 
-        webcam.start()
+        Webcam.start()
         .then(result =>{
             console.log("webcam started");
         })
@@ -186,17 +186,17 @@
     //$('#camera').attr('display', 'block');
 
     $('#checker').click(function(){
-        picture = webcam.snap();
+        picture = Webcam.snap();
         console.log(picture);
         $(".image-tag").val(picture);
-        webcam.stop();
+        Webcam.stop();
         $('#checker').hide();
     }); /*END click*/
 
 
     $('#btnOcultarCamara').click(function(){
 
-        webcam.stop();
+        Webcam.stop();
         $('#btnCamara').show();
         $('#btnOcultarCamara').hide();
         $('#checker').hide();
