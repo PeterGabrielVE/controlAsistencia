@@ -41,7 +41,7 @@
 
 
 </style>
-<script type="text/javascript" src="https://unpkg.com/Webcam-easy/dist/webcam-easy.min.js"></script>
+<script src={{asset('assets/js/webcam-easy.min.js')}}></script>
 <script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKA5z9mjBp51OKJ0Ub2rEZmOf2TDliAnk&libraries=places">
         </script>
 @section('title')
