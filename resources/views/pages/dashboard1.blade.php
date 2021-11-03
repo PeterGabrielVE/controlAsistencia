@@ -163,11 +163,11 @@
 
     var webCamElement = document.getElementById("webcam");
     var canvasElement = document.getElementById("canvas");
-    const Webcam = new Webcam(webCamElement, 'user', canvasElement, null);
+    const webcam = new Webcam(webCamElement, 'user', canvasElement, null);
 
     $('#btnCamara').click(function(){
 
-        Webcam.start()
+        webcam.start()
         .then(result =>{
             console.log("webcam started");
         })
@@ -186,17 +186,17 @@
     //$('#camera').attr('display', 'block');
 
     $('#checker').click(function(){
-        picture = Webcam.snap();
+        picture = webcam.snap();
         console.log(picture);
         $(".image-tag").val(picture);
-        Webcam.stop();
+        webcam.stop();
         $('#checker').hide();
     }); /*END click*/
 
 
     $('#btnOcultarCamara').click(function(){
 
-        Webcam.stop();
+        webcam.stop();
         $('#btnCamara').show();
         $('#btnOcultarCamara').hide();
         $('#checker').hide();
