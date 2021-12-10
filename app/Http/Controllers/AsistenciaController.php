@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use DateTime;
 use App\Asistencia;
+use App\User;
 use App\Mail\SendMail;
 use Mail;
 
@@ -66,7 +67,7 @@ class AsistenciaController extends Controller
                 $asis->latitude = $request->latitude;
                 $asis->longitude = $request->longitude;
                 $asis->save();
-                $this->sendEmail($asis);
+                $this->sendEmail($asis,'Entrada');
                 toastr()->success('¡Se ha registrado exitosamente!');
 
                 return redirect()->back();
@@ -83,7 +84,7 @@ class AsistenciaController extends Controller
                 $marca->longitude_salida = $request->longitude;
 
                 $marca->save();
-                $this->sendEmail($asis);
+                $this->sendEmail($asis,'Salida');
                 toastr()->success('¡Se ha registrado exitosamente!');
                 return redirect()->back();
             }
@@ -168,21 +169,28 @@ class AsistenciaController extends Controller
         }
     }
 
-    public function sendEmail($user)
+    public function sendEmail($asis,$tipo)
     {
-        dd($user);
-        $user = User::find($user->id_user);
+        $user = User::find($asis->id_user);
+        //dd($user);
+        $fecha = Carbon::now();
+        $ip = '';
+        if($asis->tipo == 1){
+            $fecha = $asis->fecha;
+            $ip = $asis->ip;
+        }else{
+            $fecha = $asis->fecha_salida;
+            $ip = $asis->ip_salida;
+        }
 
         $user_detail = [
-        'nombre' => $user->nombre,
-        'empresa' => $request->empresa,
-        'telefono' => $request->telefono,
-        'mensaje' => $request->mensaje,
-        'name_edificio' => $request->name_edificio,
-        'id_anuncio' => $request->id_anuncio,
-        'nombre_solicitante' => $request->nombre_solicitante
+        'nombre' => $user->fullname.' '.$user->last_name,
+        'fecha' => $fecha,
+        'ip' => $ip,
+        'tipo' => $tipo,
+        'sistema' => $asis->sistema
         ];
-        Mail::to($user->email)->send(new MySendMail($user_detail));
+        Mail::to($user->email)->send(new SendMail($user_detail));
           if (Mail::failures()) {
             return response()->Fail('Sorry! Please try again latter');
           }else{
