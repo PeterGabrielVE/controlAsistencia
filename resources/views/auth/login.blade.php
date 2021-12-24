@@ -15,7 +15,7 @@
                 {!! Form::open(['route'=>'login','method'=>'POST']) !!}
                     {{ csrf_field() }}
                     <div class="form-group has-icon">
-                        <i class="icon-envelope-o"></i>
+                        <i class="icon-vcard"></i>
                         {!! Form::text('rut', null, ['class'=>'form-control form-control-lg', 'placeholder'=>'RUT', 'require']) !!}
                         @error('rut')
                         <span class="help-block text-danger">
