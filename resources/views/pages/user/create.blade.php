@@ -48,7 +48,7 @@
 										{!! Form::text('phone1', null, ['class'=>'form-control r-0 light s-12', 'id'=>'phone1', 'onclick'=>'inputClear(this.id)']) !!}
 									</div>
 									<div class="form-group col-6 m-0" id="rol_group">
-										{!! Form::label('rut', 'Identificación', ['class'=>'col-form-label s-12']) !!}
+										{!! Form::label('rut', '* RUT', ['class'=>'col-form-label s-12']) !!}
 										{!! Form::text('rut', null, ['class'=>'form-control r-0 light s-12', 'id'=>'rut', 'onclick'=>'inputClear(this.id)','required']) !!}
 										<span class="rol_span"></span>
 									</div>
