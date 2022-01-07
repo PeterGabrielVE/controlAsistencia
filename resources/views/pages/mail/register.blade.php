@@ -8,7 +8,8 @@
 		 <h5>*DATOS DE LA MARCA*</h5>
 		 <p>Usuario: {{ $user_detail['nombre'] }}</p>
 		 <p>Sistema: {{ $user_detail['sistema'] }}</p>
-		 <p>IP: {{ $user_detail['ip'] }}</p>
+		 <p>Fecha: {{ \Carbon\Carbon::parse($user_detail['fecha'])->format('d/m/Y') }}</p>
+		 <p>Hora de Marcación: {{ \Carbon\Carbon::parse($user_detail['fecha'])->format('H:i:s') }}</p>
 		 <p>TIPO: {{ $user_detail['tipo'] }}</p>
     </div>
     <br>

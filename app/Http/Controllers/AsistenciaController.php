@@ -74,7 +74,7 @@ class AsistenciaController extends Controller
                 $asis->fecha = Carbon::now();
                 $asis->tipo = $request->tipo;
                 $asis->sistema = 'web';
-                $asis->ip = $request->ip();
+                $asis->ip = $request->ip() ?? $ip;
                 $asis->image = $fileName;
                 $asis->latitude = $request->latitude;
                 $asis->longitude = $request->longitude;
@@ -90,7 +90,7 @@ class AsistenciaController extends Controller
                 $marca->fecha_salida = Carbon::now();
                 $marca->tipo = 1;
                 $marca->note= $request->note;
-                $marca->ip_salida = $request->ip();
+                $marca->ip_salida = $request->ip() ?? $ip;
                 $marca->image_salida = $fileName;
                 $marca->latitude_salida = $request->latitude;
                 $marca->longitude_salida = $request->longitude;
