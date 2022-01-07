@@ -29,7 +29,7 @@ class SendMail extends Mailable
      */
     public function build()
     {   $user_detail = $this->user_detail;
-        return $this->view('pages.mail.register')->subject('Registro Exitoso - OPSONTIME');
+        return $this->view('pages.mail.register')->subject('Marcación exitosa - OPSONTIME');
     }
 }
 ?>
