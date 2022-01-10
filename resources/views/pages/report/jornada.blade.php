@@ -1,16 +1,4 @@
 @extends('layouts.app')
-<script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKA5z9mjBp51OKJ0Ub2rEZmOf2TDliAnk&libraries=places">
-</script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
-    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-    crossorigin=""/>
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
-
-<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
-    integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
-    crossorigin=""></script>
-<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 @section('title')
 <h1 class="nav-title text-white"> <i class="icon icon-documents3 text-blue s-18"></i>
 JORNADA</h1>
@@ -22,6 +10,7 @@ JORNADA</h1>
 <div class="page height-full">
 
     {{-- alerts --}}
+    
     <div class="container-fluid animatedParent animateOnce my-3">
         <div class="animated fadeInUpShort">
             <div class="card">
@@ -34,6 +23,30 @@ JORNADA</h1>
                             </div>
                         </div>
                     {{-- </div> --}}
+                    <form method="GET" action="{{ route('report.filters.jorn') }}">
+                        <div class="row text-right mb-4">
+                                    <div class="form-group col-3 m-0">
+                                        {!! Form::label('user', 'Usuario', ['class'=>'col-form-label s-12']) !!}
+                                        {!! Form::select('user_id',$users, null, ['class'=>'form-control r-0 light s-12','id'=>'users']) !!}
+                                        <span class="descripcion_span"></span>
+                                    </div>
+                                    <div class="form-group col-3 m-0">
+                                        {!! Form::label('since', 'Desde', ['class'=>'col-form-label s-12']) !!}
+                                        {!! Form::date('since', null, ['class'=>'form-control r-0 light s-12','id'=>'since']) !!}
+                                        <span class="descripcion_span"></span>
+                                    </div>
+                                    <div class="form-group col-3 m-0">
+                                        {!! Form::label('until', 'Hasta', ['class'=>'col-form-label s-12']) !!}
+                                        {!! Form::date('until', null, ['class'=>'form-control r-0 light s-12','id'=>'until']) !!}
+                                        <span class="descripcion_span"></span>
+                                    </div>
+                                    <div class="form-group col-3 m-0 p-2">
+                                        <button class="btn btn-info form-control s-12 mt-4" type="submit">Buscar</button>
+                                    
+                                    </div>
+                            
+                        </div>
+                    </form>
                     <div id="table" class="m-auto table-responsive">
                     <table id="mydatatable" class="table table-bordered table-hover table-sm text-12" data-page-length='100' style="font-size:14px; width: 100%;border-collapse: collapse;">
                             <thead>
@@ -89,6 +102,14 @@ JORNADA</h1>
 @section('js')
 <script>
 $(document).ready(function() {
+
+    $('#until').on('click, change', function(){
+        $('#since').attr('required', true)
+    })
+
+    $('#since').on('click, change', function(){
+        $('#until').attr('required', true)
+    })
 
     $('#mydatatable thead tr').clone(true).appendTo( '#mydatatable thead' );
             $('#mydatatable thead tr:eq(1) th').each( function (i) {
