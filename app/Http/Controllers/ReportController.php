@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Asistencia;
+use App\User;
 use App\Models\Assignment;
 use App\Models\Turn;
 use DB;
@@ -19,8 +20,9 @@ class ReportController extends Controller
 
     public function index()
     {
+        $users = User::where('status',1)->get()->prepend('Seleccionar Todo…', '');
         $asistencia = Asistencia::orderBy('fecha','DESC')->get();
-        return view('pages.report.index',compact('asistencia'));
+        return view('pages.report.index',compact('asistencia','users'));
     }
 
     public function report_jornada(){
@@ -153,5 +155,26 @@ class ReportController extends Controller
         //dd($asistencia);
 
         return view('pages.report.jornada',compact('asistencia','inicio','final'));
+    }
+
+    public function report_filter_marcas(Request $req)
+    {
+        //dd($req->all());
+        if($req->user_id != '' || $req->user_id != null){
+            $asistencia = Asistencia::where('id_user',$req->user_id)
+                                ->whereBetween('fecha',[$req->since,$req->until])
+                                ->orderBy('fecha','DESC')
+                                ->get();
+        }else{
+            $asistencia = Asistencia::whereBetween('fecha',[$req->since,$req->until])
+                                ->orWhereBetween('fecha_salida',[$req->since,$req->until])
+                                ->orderBy('fecha','DESC')
+                                ->get();
+        }
+        
+        $users = User::where('status',1)
+        ->select(DB::raw("CONCAT(fullname,' ',last_name) AS name"),'id')
+        ->pluck('name','id')->prepend('Seleccionar Todo…', '');
+        return view('pages.report.index',compact('asistencia','users'));
     }
 }

@@ -44,43 +44,43 @@
         //$day = date('l', $fecha);
         $day = (date('N', $fecha)) - 1;
 
-
-
-
                 $turn = Turn::find($turn);
-                $ingreso = $turn->ingreso;
+                if($turn != null){
+                    $ingreso = $turn->since;
 
-                $horaInicio = $ingreso.':00';
-                $actual =Carbon\Carbon::parse($hour)->format('Y-m-d');
-
-                $date = $actual.' '.$horaInicio;
-                $horafin = Carbon\Carbon::parse($hour)->format('H:i:s');
-
-                $horai=substr($horaInicio,0,2);
-                $mini=substr($horaInicio,3,2);
-                $segi=substr($horaInicio,6,2);
-
-                $horaf=substr($horafin,0,2);
-                $minf=substr($horafin,3,2);
-                $segf=substr($horafin,6,2);
-
-                $ini=((($horai*60)*60)+($mini*60)+$segi);
-                $fin=((($horaf*60)*60)+($minf*60)+$segf);
-
-                if($date > $hour){
-                    $dif=$ini-$fin;
-                    $difh=floor($dif/3600);
-                    $difm=floor(($dif-($difh*3600))/60);
-                    $difs=$dif-($difm*60)-($difh*3600);
-                    return '- '.$difh.' Horas '.$difm.' minutos';
-                }else{
-                    $dif=$fin-$ini;
-                    $difh=floor($dif/3600);
-                    $difm=floor(($dif-($difh*3600))/60);
-                    $difs=$dif-($difm*60)-($difh*3600);
-                    return $difh.' Horas '.$difm.' minutos';
+                    $horaInicio = $ingreso.':00';
+                    $actual =Carbon\Carbon::parse($hour)->format('Y-m-d');
+    
+                    $date = $actual.' '.$horaInicio;
+                    $horafin = Carbon\Carbon::parse($hour)->format('H:i:s');
+    
+                    $horai=substr($horaInicio,0,2);
+                    $mini=substr($horaInicio,3,2);
+                    $segi=substr($horaInicio,6,2);
+    
+                    $horaf=substr($horafin,0,2);
+                    $minf=substr($horafin,3,2);
+                    $segf=substr($horafin,6,2);
+    
+                    $ini=((($horai*60)*60)+($mini*60)+$segi);
+                    $fin=((($horaf*60)*60)+($minf*60)+$segf);
+    
+                    if($date > $hour){
+                        $dif=$ini-$fin;
+                        $difh=floor($dif/3600);
+                        $difm=floor(($dif-($difh*3600))/60);
+                        $difs=$dif-($difm*60)-($difh*3600);
+                        return '- '.$difh.' Horas '.$difm.' minutos';
+                    }else{
+                        $dif=$fin-$ini;
+                        $difh=floor($dif/3600);
+                        $difm=floor(($dif-($difh*3600))/60);
+                        $difs=$dif-($difm*60)-($difh*3600);
+                        return $difh.' Horas '.$difm.' minutos';
+                    }
                 }
-
+            
+        return '';        
 
     }
 
