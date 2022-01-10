@@ -20,7 +20,9 @@ class ReportController extends Controller
 
     public function index()
     {
-        $users = User::where('status',1)->get()->prepend('Seleccionar Todo…', '');
+        $users = User::where('status',1)
+        ->select(DB::raw("CONCAT(fullname,' ',last_name) AS name"),'id')
+        ->pluck('name','id')->prepend('Seleccionar Todo…', '');
         $asistencia = Asistencia::orderBy('fecha','DESC')->get();
         return view('pages.report.index',compact('asistencia','users'));
     }
