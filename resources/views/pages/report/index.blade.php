@@ -114,7 +114,7 @@ MARCAS</h1>
         }else{
             urlAjax ={!! json_encode(url('exportReportExcel')) !!};
         }
-        
+
 
         let user_id = $('#user_id').val();
         let since = $('#since').val();
@@ -133,7 +133,7 @@ MARCAS</h1>
         }
         window.location.href = `${urlAjax}/${user_id}/${since}/${until}`;
 
-        
+
         console.log(data);
     }
 $(document).ready(function() {

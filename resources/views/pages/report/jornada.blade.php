@@ -25,19 +25,19 @@ JORNADA</h1>
                     {{-- </div> --}}
                     <form method="GET" action="{{ route('report.filters.jorn') }}">
                         <div class="row mb-4">
-                                    <div class="form-group col-3 m-0">
+                        <div class="form-group col-3 m-0">
                                         {!! Form::label('user', 'Usuario', ['class'=>'col-form-label s-12']) !!}
-                                        {!! Form::select('user_id',$users, null, ['class'=>'form-control r-0 light s-12','id'=>'users']) !!}
+                                        {!! Form::select('user_id',$users,$user_id ?? null, ['class'=>'form-control r-0 light s-12','id'=>'user_id']) !!}
                                         <span class="descripcion_span"></span>
                                     </div>
                                     <div class="form-group col-3 m-0">
                                         {!! Form::label('since', 'Desde', ['class'=>'col-form-label s-12']) !!}
-                                        {!! Form::date('since', null, ['class'=>'form-control r-0 light s-12','id'=>'since']) !!}
+                                        {!! Form::date('since', $since ?? null, ['class'=>'form-control r-0 light s-12','id'=>'since']) !!}
                                         <span class="descripcion_span"></span>
                                     </div>
                                     <div class="form-group col-3 m-0">
                                         {!! Form::label('until', 'Hasta', ['class'=>'col-form-label s-12']) !!}
-                                        {!! Form::date('until', null, ['class'=>'form-control r-0 light s-12','id'=>'until']) !!}
+                                        {!! Form::date('until', $until ?? null, ['class'=>'form-control r-0 light s-12','id'=>'until']) !!}
                                         <span class="descripcion_span"></span>
                                     </div>
                                     <div class="form-group col-3 m-0 p-2">
@@ -109,7 +109,35 @@ JORNADA</h1>
 <script>
 
 function exportar(option){
-        alert(option);
+
+let urlAjax = {!! json_encode(url('exportJornadaReportPDF')) !!};
+
+if(option == 2){
+    urlAjax = {!! json_encode(url('exportJornadaReportPDF')) !!};
+}else{
+    urlAjax ={!! json_encode(url('exportJornadaReportExcel')) !!};
+}
+
+
+let user_id = $('#user_id').val();
+let since = $('#since').val();
+let until = $('#until').val();
+
+if(user_id == '' || user_id == null){
+    user_id = 0;
+}
+
+if(since == '' || since == null){
+    since = '01-01-2021';
+}
+
+if(until == '' || until == null){
+    until = '01-01-2021';
+}
+window.location.href = `${urlAjax}/${user_id}/${since}/${until}`;
+
+
+console.log(data);
 }
 $(document).ready(function() {
 

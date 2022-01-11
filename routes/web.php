@@ -79,6 +79,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('reporte/jornada/busquedas', 'ReportController@report_jornada_filter')->name('report.filters.jorn');
 	Route::get('exportReportPDF/{user?}/{since?}/{until?}', 'ReportController@exportReportPDF')->name('exportReportPDF');
 	Route::get('exportReportExcel/{user?}/{since?}/{until?}', 'ReportController@exportReportExcel')->name('exportReportExcel');
+
+	Route::get('exportJornadaReportPDF/{user?}/{since?}/{until?}', 'ReportController@exportJornadaReportPDF')->name('exportJornadaReportPDF');
+	Route::get('exportJornadaReportExcel/{user?}/{since?}/{until?}', 'ReportController@exportJornadaReportExcel')->name('exportJornadaReportExcel');
 	
     Route::get('reporte/empleados', 'ReportController@report_empleados')->name('reporte/empleados');
     Route::get('jornada', 'ReportController@report_jornada_by_rol')->name('reporte/jornada');

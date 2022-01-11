@@ -205,7 +205,7 @@ class ReportController extends Controller
         return view('pages.report.index',compact('asistencia','users','user_id','since','until'));
     }
 
-    public function report_jornada_filter(){
+    public function report_jornada_filter(Request $req){
 
         ini_set('max_execution_time', 300);
         set_time_limit(0);
@@ -247,16 +247,14 @@ class ReportController extends Controller
         $inicio = strtotime($primer->fecha);
         $final = strtotime($ultimo->fecha."+ 1 days");
 
-        $data = [
-            '$user_id' => $req->user_id,
-            'since' => $req->since,
-            'until' => $req->until
-        ];
+        $user_id = $req->user_id;
+        $since = $req->since;
+        $until = $req->until;
 
-        return view('pages.report.jornada',compact('asistencia','inicio','final','users','data'));
+        return view('pages.report.jornada',compact('asistencia','inicio','final','users','user_id','since','until'));
     }
 
-    public function exportReportPDF($user_id, $since, $until){
+    public function exportReportPDF(Request $req,$user_id, $since, $until){
         
         if($user_id != 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
             $asistencia = Asistencia::where('id_user',$user_id)
