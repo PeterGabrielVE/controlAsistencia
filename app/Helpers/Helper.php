@@ -47,7 +47,7 @@
         $turn = Turn::find($turn);
         
         if($turn != null || $turn != ''){
-            /*$ingreso = $turn->since;
+            $ingreso = $turn->since;
 
             $horaInicio = $ingreso.':00';
             $actual =Carbon\Carbon::parse($hour)->format('Y-m-d');
@@ -55,16 +55,16 @@
             $date = $actual.' '.$horaInicio;
             $horafin = Carbon\Carbon::parse($hour)->format('H:i:s');
     
-                    $horai=substr($horaInicio,0,2);
-                    $mini=substr($horaInicio,3,2);
-                    $segi=substr($horaInicio,6,2);
+            $horai=substr($horaInicio,0,2);
+            $mini=substr($horaInicio,3,2);
+            $segi=substr($horaInicio,6,2);
     
-                    $horaf=substr($horafin,0,2);
-                    $minf=substr($horafin,3,2);
-                    $segf=substr($horafin,6,2);
+            $horaf=substr($horafin,0,2);
+            $minf=substr($horafin,3,2);
+            $segf=substr($horafin,6,2);
     
-                    $ini=((($horai*60)*60)+($mini*60)+$segi);
-                    $fin=((($horaf*60)*60)+($minf*60)+$segf);
+            $ini=((((int)$horai*60)*60)+((int)$mini*60)+(int)$segi);
+            $fin=((((int)$horaf*60)*60)+((int)$minf*60)+(int)$segf);
     
                     /*if($date > $hour){
                         $dif=(int)$ini-(int)$fin;
