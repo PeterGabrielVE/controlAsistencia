@@ -330,8 +330,13 @@ class ReportController extends Controller
             $asistencia =   DB::table('jornada')->get();
         }
         
+        $primer = DB::table('jornada')->first();
+        $ultimo = DB::table('jornada')->orderBy('fecha', 'desc')->first();
+        $inicio = strtotime($primer->fecha);
+        $final = strtotime($ultimo->fecha."+ 1 days");
 
-        $pdf = \PDF::loadView('pages.report.reporte_jornada', compact('asistencia'));
+
+        $pdf = \PDF::loadView('pages.report.reporte_jornada', compact('asistencia','inicio','final'));
 
         return $pdf->download('reporte_jornada.pdf');
     }

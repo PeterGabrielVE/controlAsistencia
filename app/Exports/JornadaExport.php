@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
+use DB;
 
 class JornadaExport implements FromView 
 {
@@ -18,8 +19,12 @@ class JornadaExport implements FromView
     public function view(): view{
 
         $asistencia = $this->id;
+        $primer = DB::table('jornada')->first();
+        $ultimo = DB::table('jornada')->orderBy('fecha', 'desc')->first();
+        $inicio = strtotime($primer->fecha);
+        $final = strtotime($ultimo->fecha."+ 1 days");
 
-        return view("pages.report.reporte_marcaje", compact("asistencia"));
+        return view("pages.report.reporte_marcaje", compact('asistencia','inicio','final'));
 
 
     }
