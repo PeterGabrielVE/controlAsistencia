@@ -41,8 +41,8 @@ MARCAS</h1>
                         </form>
                         <div class="row"> 
                             <div class=" col-12 text-right">
-                                <a class="col-sm-2 btn btn-default btn-sm" href="{{ route('report.jornada') }}" ><img src="img/excel-ico.png" alt="" heigth= "" style="padding:0px !important" /> {{ __('Exportar Excell') }}</a>
-                                <a class="col-sm-2 btn btn-default btn-sm" href="{{ route('report.jornada') }}" ><img src="img/pdf-icon.png" alt="" heigth= "" style="padding:0px !important" /> {{ __('Exportar PDF') }}</a>
+                                <a class="col-sm-2 btn btn-default btn-sm" onclick="exportar(1)" ><img src="img/excel-ico.png" alt="" heigth= "" style="padding:0px !important" /> {{ __('Exportar Excell') }}</a>
+                                <a class="col-sm-2 btn btn-default btn-sm" onclick="exportar(2)"><img src="img/pdf-icon.png" alt="" heigth= "" style="padding:0px !important" /> {{ __('Exportar PDF') }}</a>
                             </div>
                         </div>
                     <div id="table" class="table-responsive" style="overflow-x:auto;">
@@ -104,6 +104,10 @@ MARCAS</h1>
 @endsection
 @section('js')
 <script>
+
+    function exportar(option){
+        alert(option);
+    }
 $(document).ready(function() {
 
     $('#until').on('click, change', function(){
@@ -130,7 +134,7 @@ $(document).ready(function() {
                    orderCellsTop: true,
                    fixedHeader: true,
                    //dom: 'Blrtip ',
-                   buttons: ['excel','pdf'],
+                   buttons: [],
                    info:true,
                    bLengthChange: true,
                    lengthMenu: [[5, 10, 25, 50,100, -1], [5, 10, 25, 50,100, "Todos"]],

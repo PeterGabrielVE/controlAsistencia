@@ -66,13 +66,13 @@
                     $fin=((($horaf*60)*60)+($minf*60)+$segf);
     
                     if($date > $hour){
-                        $dif=$ini-$fin;
+                        $dif=(int)$ini-(int)$fin;
                         $difh=floor($dif/3600);
                         $difm=floor(($dif-($difh*3600))/60);
                         $difs=$dif-($difm*60)-($difh*3600);
                         return '- '.$difh.' Horas '.$difm.' minutos';
                     }else{
-                        $dif=$fin-$ini;
+                        $dif=(int)$fin-(int)$ini;
                         $difh=floor($dif/3600);
                         $difm=floor(($dif-($difh*3600))/60);
                         $difs=$dif-($difm*60)-($difh*3600);
