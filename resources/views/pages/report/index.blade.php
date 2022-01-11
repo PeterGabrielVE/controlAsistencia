@@ -15,32 +15,36 @@ MARCAS</h1>
         <div class="animated fadeInUpShort">
             <div class="card">
                 <div class="card-body">
-                    {{-- <div class="row text-right"> --}}
                         <form method="GET" action="{{ route('report.filters.marcas') }}">
-                        <div class="row text-right mb-4">
+                        <div class="row mb-4">
                                     <div class="form-group col-3 m-0">
                                         {!! Form::label('user', 'Usuario', ['class'=>'col-form-label s-12']) !!}
-                                        {!! Form::select('user_id',$users, null, ['class'=>'form-control r-0 light s-12','id'=>'users']) !!}
+                                        {!! Form::select('user_id',$users,$user_id ?? null, ['class'=>'form-control r-0 light s-12','id'=>'users']) !!}
                                         <span class="descripcion_span"></span>
                                     </div>
                                     <div class="form-group col-3 m-0">
                                         {!! Form::label('since', 'Desde', ['class'=>'col-form-label s-12']) !!}
-                                        {!! Form::date('since', null, ['class'=>'form-control r-0 light s-12','id'=>'since']) !!}
+                                        {!! Form::date('since', $since ?? null, ['class'=>'form-control r-0 light s-12','id'=>'since']) !!}
                                         <span class="descripcion_span"></span>
                                     </div>
                                     <div class="form-group col-3 m-0">
                                         {!! Form::label('until', 'Hasta', ['class'=>'col-form-label s-12']) !!}
-                                        {!! Form::date('until', null, ['class'=>'form-control r-0 light s-12','id'=>'until']) !!}
+                                        {!! Form::date('until', $until ?? null, ['class'=>'form-control r-0 light s-12','id'=>'until']) !!}
                                         <span class="descripcion_span"></span>
                                     </div>
                                     <div class="form-group col-3 m-0 p-2">
                                         <button class="btn btn-info form-control s-12 mt-4" type="submit">Buscar</button>
-                                      
+                                    
                                     </div>
                             
                         </div>
                         </form>
-                    {{-- </div> --}}
+                        <div class="row"> 
+                            <div class=" col-12 text-right">
+                                <a class="col-sm-2 btn btn-default btn-sm" href="{{ route('report.jornada') }}" ><img src="img/excel-ico.png" alt="" heigth= "" style="padding:0px !important" /> {{ __('Exportar Excell') }}</a>
+                                <a class="col-sm-2 btn btn-default btn-sm" href="{{ route('report.jornada') }}" ><img src="img/pdf-icon.png" alt="" heigth= "" style="padding:0px !important" /> {{ __('Exportar PDF') }}</a>
+                            </div>
+                        </div>
                     <div id="table" class="table-responsive" style="overflow-x:auto;">
                     <table id="mydatatable" class="table table-bordered table-hover table-sm text-12" data-page-length='100' style="font-size:14px;width: 100%;border-collapse: collapse;">
                             <thead>
@@ -126,7 +130,7 @@ $(document).ready(function() {
                    orderCellsTop: true,
                    fixedHeader: true,
                    //dom: 'Blrtip ',
-                   buttons: ['excel'],
+                   buttons: ['excel','pdf'],
                    info:true,
                    bLengthChange: true,
                    lengthMenu: [[5, 10, 25, 50,100, -1], [5, 10, 25, 50,100, "Todos"]],

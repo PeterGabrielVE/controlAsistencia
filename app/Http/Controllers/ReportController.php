@@ -183,7 +183,20 @@ class ReportController extends Controller
         $users = User::where('status',1)
         ->select(DB::raw("CONCAT(fullname,' ',last_name) AS name"),'id')
         ->pluck('name','id')->prepend('Seleccionar Todo…', '');
-        return view('pages.report.index',compact('asistencia','users'));
+
+        $data = [
+            'data' =>[
+                'user_id' => $req->user_id,
+                'since' => $req->since,
+                'until' => $req->until
+                ]
+        ];
+        $user_id = $req->user_id;
+        $since = $req->since;
+        $until = $req->until;
+        //$data = json_encode($data, JSON_NUMERIC_CHECK);
+        //dd($data);
+        return view('pages.report.index',compact('asistencia','users','user_id','since','until'));
     }
 
     public function report_jornada_filter(){
@@ -228,8 +241,12 @@ class ReportController extends Controller
         $inicio = strtotime($primer->fecha);
         $final = strtotime($ultimo->fecha."+ 1 days");
 
-        //dd($asistencia);
+        $data = [
+            '$user_id' => $req->user_id,
+            'since' => $req->since,
+            'until' => $req->until
+        ];
 
-        return view('pages.report.jornada',compact('asistencia','inicio','final','users'));
+        return view('pages.report.jornada',compact('asistencia','inicio','final','users','data'));
     }
 }
