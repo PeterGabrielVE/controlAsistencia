@@ -134,7 +134,6 @@ MARCAS</h1>
         window.location.href = `${urlAjax}/${user_id}/${since}/${until}`;
 
 
-        console.log(data);
     }
 $(document).ready(function() {
 
