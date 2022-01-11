@@ -44,15 +44,16 @@
         //$day = date('l', $fecha);
         $day = (date('N', $fecha)) - 1;
 
-                $turn = Turn::find($turn);
-                if($turn != null || $turn != ''){
-                    $ingreso = $turn->since;
+        $turn = Turn::find($turn);
+        
+        if($turn != null || $turn != ''){
+            /*$ingreso = $turn->since;
 
-                    $horaInicio = $ingreso.':00';
-                    $actual =Carbon\Carbon::parse($hour)->format('Y-m-d');
+            $horaInicio = $ingreso.':00';
+            $actual =Carbon\Carbon::parse($hour)->format('Y-m-d');
     
-                    $date = $actual.' '.$horaInicio;
-                    $horafin = Carbon\Carbon::parse($hour)->format('H:i:s');
+            $date = $actual.' '.$horaInicio;
+            $horafin = Carbon\Carbon::parse($hour)->format('H:i:s');
     
                     $horai=substr($horaInicio,0,2);
                     $mini=substr($horaInicio,3,2);
