@@ -19,7 +19,7 @@ MARCAS</h1>
                         <div class="row mb-4">
                                     <div class="form-group col-3 m-0">
                                         {!! Form::label('user', 'Usuario', ['class'=>'col-form-label s-12']) !!}
-                                        {!! Form::select('user_id',$users,$user_id ?? null, ['class'=>'form-control r-0 light s-12','id'=>'users']) !!}
+                                        {!! Form::select('user_id',$users,$user_id ?? null, ['class'=>'form-control r-0 light s-12','id'=>'user_id']) !!}
                                         <span class="descripcion_span"></span>
                                     </div>
                                     <div class="form-group col-3 m-0">
@@ -41,8 +41,8 @@ MARCAS</h1>
                         </form>
                         <div class="row"> 
                             <div class=" col-12 text-right">
-                                <a class="col-sm-2 btn btn-default btn-sm" onclick="exportar(1)" ><img src="img/excel-ico.png" alt="" heigth= "" style="padding:0px !important" /> {{ __('Exportar Excell') }}</a>
-                                <a class="col-sm-2 btn btn-default btn-sm" onclick="exportar(2)"><img src="img/pdf-icon.png" alt="" heigth= "" style="padding:0px !important" /> {{ __('Exportar PDF') }}</a>
+                                <a class="col-sm-2 btn btn-default btn-sm" onclick="exportar(1)" ><img src="{{ asset('/img/excel-ico.png') }}" alt="" heigth= "" style="padding:0px !important" /> {{ __('Exportar Excell') }}</a>
+                                <a class="col-sm-2 btn btn-default btn-sm" onclick="exportar(2)"><img src="{{ asset('/img/pdf-icon.png') }}" alt="" heigth= "" style="padding:0px !important" /> {{ __('Exportar PDF') }}</a>
                             </div>
                         </div>
                     <div id="table" class="table-responsive" style="overflow-x:auto;">
@@ -106,7 +106,35 @@ MARCAS</h1>
 <script>
 
     function exportar(option){
-        alert(option);
+
+        let urlAjax = {!! json_encode(url('exportReportPDF')) !!};
+
+        if(option == 2){
+            urlAjax = {!! json_encode(url('exportReportPDF')) !!};
+        }else{
+            urlAjax ={!! json_encode(url('exportReportExcel')) !!};
+        }
+        
+
+        let user_id = $('#user_id').val();
+        let since = $('#since').val();
+        let until = $('#until').val();
+
+        if(user_id == '' || user_id == null){
+            user_id = 0;
+        }
+
+        if(since == '' || since == null){
+            since = '01-01-2021';
+        }
+
+        if(until == '' || until == null){
+            until = '01-01-2021';
+        }
+        window.location.href = `${urlAjax}/${user_id}/${since}/${until}`;
+
+        
+        console.log(data);
     }
 $(document).ready(function() {
 

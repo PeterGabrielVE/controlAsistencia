@@ -9,7 +9,9 @@ use App\Asistencia;
 use App\User;
 use App\Models\Assignment;
 use App\Models\Turn;
+use App\Exports\MarcajeExport;
 use DB;
+use Excel;
 
 class ReportController extends Controller
 {
@@ -252,5 +254,49 @@ class ReportController extends Controller
         ];
 
         return view('pages.report.jornada',compact('asistencia','inicio','final','users','data'));
+    }
+
+    public function exportReportPDF($user_id, $since, $until){
+        
+        if($user_id != 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
+            $asistencia = Asistencia::where('id_user',$user_id)
+                                ->whereBetween('fecha',[$since,$until])
+                                ->orderBy('fecha','DESC')
+                                ->get();
+        }else if($user_id == 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
+            $asistencia = Asistencia::whereBetween('fecha',[$since,$until])
+                                ->orWhereBetween('fecha_salida',[$since,$until])
+                                ->orderBy('fecha','DESC')
+                                ->get();
+        }else{
+            $asistencia = Asistencia::orderBy('fecha','DESC')
+            ->get();
+        }
+        
+
+        $pdf = \PDF::loadView('pages.report.reporte_marcaje', compact('asistencia'));
+
+        return $pdf->download('reporte.pdf');
+    }
+
+    public function exportReportExcel(Request $req,$user_id, $since, $until){
+        
+        if($user_id != 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
+            $asistencia = Asistencia::where('id_user',$user_id)
+                                ->whereBetween('fecha',[$since,$until])
+                                ->orderBy('fecha','DESC')
+                                ->get();
+        }else if($user_id == 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
+            $asistencia = Asistencia::whereBetween('fecha',[$since,$until])
+                                ->orWhereBetween('fecha_salida',[$since,$until])
+                                ->orderBy('fecha','DESC')
+                                ->get();
+        }else{
+            $asistencia = Asistencia::orderBy('fecha','DESC')
+            ->get();
+        }
+        
+
+        return Excel::download(new MarcajeExport($asistencia), 'reporte_marcaje.xlsx');
     }
 }
