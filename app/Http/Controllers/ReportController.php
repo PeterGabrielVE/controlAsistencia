@@ -10,6 +10,7 @@ use App\User;
 use App\Models\Assignment;
 use App\Models\Turn;
 use App\Exports\MarcajeExport;
+use App\Exports\JornadaExport;
 use DB;
 use Excel;
 
@@ -296,5 +297,77 @@ class ReportController extends Controller
         
 
         return Excel::download(new MarcajeExport($asistencia), 'reporte_marcaje.xlsx');
+    }
+
+    public function exportJornadaReportPDF(Request $req,$user_id, $since, $until){
+
+        $asistencia = DB::table('jornada')->get();
+
+        $grupos = DB::table('groups_users')->where('id_user', Auth::user()->id)->pluck('id_group');
+        
+        if($user_id != 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
+            $asistencia = DB::table('jornada')
+            ->leftjoin('users as us','jornada.usuario','us.id')
+            ->leftjoin('users_groups as ug','us.id','ug.id_user')
+            ->leftjoin('groups as gr','ug.id_group','gr.id')
+            ->select('jornada.*')
+            ->where('usuario',$req->user_id)
+            ->whereBetween('since',[$req->since,$req->until])
+            ->whereIn('gr.id',$grupos)
+            ->orderBy('jornada.fecha','DESC')
+            ->get();
+        }else if($user_id == 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
+            $asistencia = DB::table('jornada')
+                        ->leftjoin('users as us','jornada.usuario','us.id')
+                        ->leftjoin('users_groups as ug','us.id','ug.id_user')
+                        ->leftjoin('groups as gr','ug.id_group','gr.id')
+                        ->select('jornada.*')
+                        ->whereBetween('since',[$req->since,$req->until])
+                        ->whereIn('gr.id',$grupos)
+                        ->orderBy('jornada.fecha','DESC')
+                        ->get();
+        }else{
+            $asistencia =   DB::table('jornada')->get();
+        }
+        
+
+        $pdf = \PDF::loadView('pages.report.reporte_jornada', compact('asistencia'));
+
+        return $pdf->download('reporte_jornada.pdf');
+    }
+
+    public function exportJornadaReportExcel(Request $req,$user_id, $since, $until){
+        
+        $asistencia = DB::table('jornada')->get();
+
+        $grupos = DB::table('groups_users')->where('id_user', Auth::user()->id)->pluck('id_group');
+
+        
+        if($user_id != 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
+            $asistencia = DB::table('jornada')
+            ->leftjoin('users as us','jornada.usuario','us.id')
+            ->leftjoin('users_groups as ug','us.id','ug.id_user')
+            ->leftjoin('groups as gr','ug.id_group','gr.id')
+            ->select('jornada.*')
+            ->where('usuario',$req->user_id)
+            ->whereBetween('since',[$req->since,$req->until])
+            ->whereIn('gr.id',$grupos)
+            ->orderBy('jornada.fecha','DESC')
+            ->get();
+        }else if($user_id == 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
+            $asistencia = DB::table('jornada')
+                        ->leftjoin('users as us','jornada.usuario','us.id')
+                        ->leftjoin('users_groups as ug','us.id','ug.id_user')
+                        ->leftjoin('groups as gr','ug.id_group','gr.id')
+                        ->select('jornada.*')
+                        ->whereBetween('since',[$req->since,$req->until])
+                        ->whereIn('gr.id',$grupos)
+                        ->orderBy('jornada.fecha','DESC')
+                        ->get();
+        }else{
+            $asistencia =   DB::table('jornada')->get();
+        }
+        
+        return Excel::download(new JornadaExport($asistencia), 'reporte_jornada.xlsx');
     }
 }
