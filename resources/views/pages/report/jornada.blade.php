@@ -107,6 +107,10 @@ JORNADA</h1>
 @endsection
 @section('js')
 <script>
+
+function exportar(option){
+        alert(option);
+}
 $(document).ready(function() {
 
     $('#until').on('click, change', function(){
