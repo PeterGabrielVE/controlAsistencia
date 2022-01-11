@@ -113,8 +113,12 @@ class ReportController extends Controller
 
     public function report_asistencia()
     {
+        $users = User::where('status',1)
+        ->select(DB::raw("CONCAT(fullname,' ',last_name) AS name"),'id')
+        ->pluck('name','id')->prepend('Seleccionar Todo…', '');
+
         $asistencia = Asistencia::where('id_user', Auth::user()->id)->orderBy('fecha','DESC')->get();
-        return view('pages.report.index',compact('asistencia'));
+        return view('pages.report.index',compact('asistencia','users'));
     }
 
     public function report_empleados()
