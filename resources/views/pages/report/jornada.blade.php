@@ -24,7 +24,7 @@ JORNADA</h1>
                         </div>
                     {{-- </div> --}}
                     <form method="GET" action="{{ route('report.filters.jorn') }}">
-                        <div class="row text-right mb-4">
+                        <div class="row mb-4">
                                     <div class="form-group col-3 m-0">
                                         {!! Form::label('user', 'Usuario', ['class'=>'col-form-label s-12']) !!}
                                         {!! Form::select('user_id',$users, null, ['class'=>'form-control r-0 light s-12','id'=>'users']) !!}
@@ -47,6 +47,12 @@ JORNADA</h1>
                             
                         </div>
                     </form>
+                    <div class="row"> 
+                        <div class=" col-12 text-right">
+                        <a class="col-sm-2 btn btn-default btn-sm" onclick="exportar(1)" ><img src="{{ asset('/img/excel-ico.png') }}" alt="" heigth= "" style="padding:0px !important" /> {{ __('Exportar Excell') }}</a>
+                                <a class="col-sm-2 btn btn-default btn-sm" onclick="exportar(2)"><img src="{{ asset('/img/pdf-icon.png') }}" alt="" heigth= "" style="padding:0px !important" /> {{ __('Exportar PDF') }}</a>
+                        </div>
+                    </div>
                     <div id="table" class="m-auto table-responsive">
                     <table id="mydatatable" class="table table-bordered table-hover table-sm text-12" data-page-length='100' style="font-size:14px; width: 100%;border-collapse: collapse;">
                             <thead>
@@ -127,7 +133,7 @@ $(document).ready(function() {
                    orderCellsTop: true,
                    fixedHeader: true,
                    //dom: 'Blrtip ',
-                   buttons: ['excel'],
+                   buttons:[],
                    info:true,
                    bLengthChange: true,
                    lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100,"Todos"]],
@@ -152,12 +158,6 @@ $(document).ready(function() {
                            "previous": "Anterior"
                        }
                    },
-                   buttons: [
-                        {
-                            extend: 'excel',
-                            text: 'Exportar excel'
-                        }
-                    ],
                } );
 
    });
