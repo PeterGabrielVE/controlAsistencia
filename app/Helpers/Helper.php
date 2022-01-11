@@ -45,7 +45,7 @@
         $day = (date('N', $fecha)) - 1;
 
                 $turn = Turn::find($turn);
-                if($turn != null){
+                if($turn != null || $turn != ''){
                     $ingreso = $turn->since;
 
                     $horaInicio = $ingreso.':00';
@@ -65,7 +65,7 @@
                     $ini=((($horai*60)*60)+($mini*60)+$segi);
                     $fin=((($horaf*60)*60)+($minf*60)+$segf);
     
-                    if($date > $hour){
+                    /*if($date > $hour){
                         $dif=(int)$ini-(int)$fin;
                         $difh=floor($dif/3600);
                         $difm=floor(($dif-($difh*3600))/60);
@@ -77,7 +77,7 @@
                         $difm=floor(($dif-($difh*3600))/60);
                         $difs=$dif-($difm*60)-($difh*3600);
                         return $difh.' Horas '.$difm.' minutos';
-                    }
+                    }*/
                 }
             
         return '';        
