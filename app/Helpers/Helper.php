@@ -66,7 +66,7 @@
             $ini=((((int)$horai*60)*60)+((int)$mini*60)+(int)$segi);
             $fin=((((int)$horaf*60)*60)+((int)$minf*60)+(int)$segf);
     
-                    /*if($date > $hour){
+            if($date > $hour){
                         $dif=(int)$ini-(int)$fin;
                         $difh=floor($dif/3600);
                         $difm=floor(($dif-($difh*3600))/60);
@@ -78,7 +78,7 @@
                         $difm=floor(($dif-($difh*3600))/60);
                         $difs=$dif-($difm*60)-($difh*3600);
                         return $difh.' Horas '.$difm.' minutos';
-                    }*/
+                    }
                 }
             
         return '';        
