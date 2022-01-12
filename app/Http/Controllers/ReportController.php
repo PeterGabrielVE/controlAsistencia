@@ -175,14 +175,18 @@ class ReportController extends Controller
     public function report_filter_marcas(Request $req)
     {
         //dd($req->all());
-        if($req->user_id != '' || $req->user_id != null){
+        if($user_id != 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
             $asistencia = Asistencia::where('id_user',$req->user_id)
                                 ->whereBetween('fecha',[$req->since,$req->until])
                                 ->orderBy('fecha','DESC')
                                 ->get();
-        }else{
+        } if($user_id == 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
             $asistencia = Asistencia::whereBetween('fecha',[$req->since,$req->until])
                                 ->orWhereBetween('fecha_salida',[$req->since,$req->until])
+                                ->orderBy('fecha','DESC')
+                                ->get();
+        }else{
+            $asistencia = Asistencia::where('id_user',$req->user_id)
                                 ->orderBy('fecha','DESC')
                                 ->get();
         }
@@ -217,13 +221,23 @@ class ReportController extends Controller
         ->select(DB::raw("CONCAT(fullname,' ',last_name) AS name"),'id')
         ->pluck('name','id')->prepend('Seleccionar Todo…', '');
 
-        if($req->user_id != '' || $req->user_id != null){
+        if($user_id != 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
+            $asistencia = DB::table('jornada')
+            ->leftjoin('users as us','jornada.usuario','us.id')
+            ->leftjoin('users_groups as ug','us.id','ug.id_user')
+            ->leftjoin('groups as gr','ug.id_group','gr.id')
+            ->select('jornada.*')
+            ->where('usuario',$req->user_id)
+            ->whereBetween('since',[$req->since,$req->until])
+            ->whereIn('gr.id',$grupos)
+            ->orderBy('jornada.fecha','DESC')
+            ->get();
+        }else if($user_id == 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
             $asistencia = DB::table('jornada')
                         ->leftjoin('users as us','jornada.usuario','us.id')
                         ->leftjoin('users_groups as ug','us.id','ug.id_user')
                         ->leftjoin('groups as gr','ug.id_group','gr.id')
                         ->select('jornada.*')
-                        ->where('usuario',$req->user_id)
                         ->whereBetween('since',[$req->since,$req->until])
                         ->whereIn('gr.id',$grupos)
                         ->orderBy('jornada.fecha','DESC')
@@ -234,8 +248,7 @@ class ReportController extends Controller
                             ->leftjoin('users_groups as ug','us.id','ug.id_user')
                             ->leftjoin('groups as gr','ug.id_group','gr.id')
                             ->select('jornada.*')
-                            ->whereBetween('since',[$req->since,$req->until])
-                            ->orWhereBetween('until',[$req->since,$req->until])
+                            ->where('usuario',$req->user_id)
                             ->whereIn('gr.id',$grupos)
                             ->orderBy('jornada.fecha','DESC')
                             ->get();
