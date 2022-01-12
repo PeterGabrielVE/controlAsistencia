@@ -19,7 +19,7 @@ MARCAS</h1>
                         <div class="row mb-4">
                                     <div class="form-group col-3 m-0">
                                         {!! Form::label('user', 'Usuario', ['class'=>'col-form-label s-12']) !!}
-                                        {!! Form::select('user_id',$users,$user_id ?? null, ['class'=>'form-control r-0 light s-12','id'=>'user_id']) !!}
+                                        {!! Form::select('user_id',$users,$user_id ?? null, ['class'=>'form-control r-0 light s-12 select2','id'=>'user_id']) !!}
                                         <span class="descripcion_span"></span>
                                     </div>
                                     <div class="form-group col-3 m-0">
