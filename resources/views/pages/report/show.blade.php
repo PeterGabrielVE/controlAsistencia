@@ -25,10 +25,33 @@ MARCAS</h1>
             <div class="card">
                 <div class="form-group">
                     <div class="card-header white">
-                        <h6> LISTA DE MARCAS </h6>
+                        <h6> DETALLES DE LA MARCA </h6>
                     </div>
                 </div>
                 <div class="card-body">
+                    <div class="row mb-4">
+                    <div class="form-group col-3 m-0">
+                            {!! Form::label('name', 'Nombre', ['class'=>'col-form-label s-12']) !!}
+                            {!! Form::text('name', $asistencia->user->fullname.' '. $asistencia->user->last_name ?? null, ['class'=>'form-control r-0 light s-12','id'=>'name','disabled']) !!}
+                            <span class="descripcion_span"></span>
+                        </div>
+                        <div class="form-group col-3 m-0">
+                            
+                            {!! Form::label('name', 'RUT', ['class'=>'col-form-label s-12']) !!}
+                            {!! Form::text('name', $asistencia->user->rut ?? null, ['class'=>'form-control r-0 light s-12','id'=>'rut','disabled']) !!}
+                            <span class="descripcion_span"></span>
+                        </div>
+                        <div class="form-group col-3 m-0">
+                            {!! Form::label('since', 'IP Entrada', ['class'=>'col-form-label s-12']) !!}
+                            {!! Form::text('since', $asistencia->ip ?? null, ['class'=>'form-control r-0 light s-12','id'=>'ip_entrada','disabled']) !!}
+                            <span class="descripcion_span"></span>
+                        </div>
+                        <div class="form-group col-3 m-0">
+                            {!! Form::label('since', 'IP Salida', ['class'=>'col-form-label s-12']) !!}
+                            {!! Form::text('ip_salida', $asistencia->ip_salida ?? null, ['class'=>'form-control r-0 light s-12','id'=>'ip_salida','disabled']) !!}
+                            <span class="descripcion_span"></span>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-5 mr-2">
                             <div  id="mapid" style="height:400px; width:400px;"></div>
