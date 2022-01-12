@@ -24,6 +24,7 @@ class ReportController extends Controller
     public function index()
     {
         $users = User::where('status',1)
+        ->orderBy('fullname')
         ->select(DB::raw("CONCAT(fullname,' ',last_name) AS name"),'id')
         ->pluck('name','id')->prepend('Seleccionar Todo…', '');
         $asistencia = Asistencia::orderBy('fecha','DESC')->get();
@@ -39,7 +40,7 @@ class ReportController extends Controller
         $ultimo = DB::table('jornada')->orderBy('fecha', 'desc')->first();
         $inicio = strtotime($primer->fecha);
         $final = strtotime($ultimo->fecha."+ 1 days");
-        $users = User::where('status',1)
+        $users = User::where('status',1)->orderBy('fullname')
         ->select(DB::raw("CONCAT(fullname,' ',last_name) AS name"),'id')
         ->pluck('name','id')->prepend('Seleccionar Todo…', '');
 
@@ -116,7 +117,7 @@ class ReportController extends Controller
 
     public function report_asistencia()
     {
-        $users = User::where('status',1)
+        $users = User::where('status',1)->orderBy('fullname')
         ->select(DB::raw("CONCAT(fullname,' ',last_name) AS name"),'id')
         ->pluck('name','id')->prepend('Seleccionar Todo…', '');
 
@@ -145,7 +146,7 @@ class ReportController extends Controller
         ini_set('max_execution_time', 300);
         set_time_limit(0);
         $asistencia = DB::table('jornada')->get();
-        $users = User::where('status',1)
+        $users = User::where('status',1)->orderBy('fullname')
         ->select(DB::raw("CONCAT(fullname,' ',last_name) AS name"),'id')
         ->pluck('name','id')->prepend('Seleccionar Todo…', '');
 
@@ -175,12 +176,12 @@ class ReportController extends Controller
     public function report_filter_marcas(Request $req)
     {
         //dd($req->all());
-        if($user_id != 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
+        if($req->user_id != 0 && $req->since != '01-01-2021'  && $req->until != '01-01-2021'){
             $asistencia = Asistencia::where('id_user',$req->user_id)
                                 ->whereBetween('fecha',[$req->since,$req->until])
                                 ->orderBy('fecha','DESC')
                                 ->get();
-        } if($user_id == 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
+        } if($req->user_id == 0 && $req->since != '01-01-2021'  && $req->until != '01-01-2021'){
             $asistencia = Asistencia::whereBetween('fecha',[$req->since,$req->until])
                                 ->orWhereBetween('fecha_salida',[$req->since,$req->until])
                                 ->orderBy('fecha','DESC')
@@ -191,7 +192,7 @@ class ReportController extends Controller
                                 ->get();
         }
         
-        $users = User::where('status',1)
+        $users = User::where('status',1)->orderBy('fullname')
         ->select(DB::raw("CONCAT(fullname,' ',last_name) AS name"),'id')
         ->pluck('name','id')->prepend('Seleccionar Todo…', '');
 
@@ -217,11 +218,12 @@ class ReportController extends Controller
         $asistencia = DB::table('jornada')->get();
 
         $grupos = DB::table('groups_users')->where('id_user', Auth::user()->id)->pluck('id_group');
-        $users = User::where('status',1)
+        $users = User::where('status',1)->orderBy('fullname')
         ->select(DB::raw("CONCAT(fullname,' ',last_name) AS name"),'id')
         ->pluck('name','id')->prepend('Seleccionar Todo…', '');
 
-        if($user_id != 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
+        if($req->user_id != 0 && $req->since != null && $req->until != null ){
+
             $asistencia = DB::table('jornada')
             ->leftjoin('users as us','jornada.usuario','us.id')
             ->leftjoin('users_groups as ug','us.id','ug.id_user')
@@ -229,27 +231,26 @@ class ReportController extends Controller
             ->select('jornada.*')
             ->where('usuario',$req->user_id)
             ->whereBetween('since',[$req->since,$req->until])
-            ->whereIn('gr.id',$grupos)
             ->orderBy('jornada.fecha','DESC')
             ->get();
-        }else if($user_id == 0 && $since != '01-01-2021'  && $until != '01-01-2021'){
+        }else if($req->user_id ==  0 && $req->since != null && $req->until != null){
+   
             $asistencia = DB::table('jornada')
                         ->leftjoin('users as us','jornada.usuario','us.id')
                         ->leftjoin('users_groups as ug','us.id','ug.id_user')
                         ->leftjoin('groups as gr','ug.id_group','gr.id')
                         ->select('jornada.*')
                         ->whereBetween('since',[$req->since,$req->until])
-                        ->whereIn('gr.id',$grupos)
                         ->orderBy('jornada.fecha','DESC')
                         ->get();
         }else{
+            
                 $asistencia = DB::table('jornada')
                             ->leftjoin('users as us','jornada.usuario','us.id')
                             ->leftjoin('users_groups as ug','us.id','ug.id_user')
                             ->leftjoin('groups as gr','ug.id_group','gr.id')
                             ->select('jornada.*')
                             ->where('usuario',$req->user_id)
-                            ->whereIn('gr.id',$grupos)
                             ->orderBy('jornada.fecha','DESC')
                             ->get();
             
