@@ -39,12 +39,6 @@ MARCAS</h1>
                             
                         </div>
                         </form>
-                        <div class="row"> 
-                            <div class=" col-12 text-right">
-                                <a class="col-sm-2 btn btn-default btn-sm" onclick="exportar(1)" ><img src="{{ asset('/img/excel-ico.png') }}" alt="" heigth= "" style="padding:0px !important" /> {{ __('Exportar Excell') }}</a>
-                                <a class="col-sm-2 btn btn-default btn-sm" onclick="exportar(2)"><img src="{{ asset('/img/pdf-icon.png') }}" alt="" heigth= "" style="padding:0px !important" /> {{ __('Exportar PDF') }}</a>
-                            </div>
-                        </div>
                     <div id="table" class="table-responsive" style="overflow-x:auto;">
                     <table id="mydatatable" class="table table-bordered table-hover table-sm text-12" data-page-length='100' style="font-size:14px;width: 100%;border-collapse: collapse;">
                             <thead>
@@ -161,7 +155,7 @@ $(document).ready(function() {
                    orderCellsTop: true,
                    fixedHeader: true,
                    //dom: 'Blrtip ',
-                   buttons: [],
+                   buttons: ['excel','pdf'],
                    info:true,
                    bLengthChange: true,
                    lengthMenu: [[5, 10, 25, 50,100, -1], [5, 10, 25, 50,100, "Todos"]],

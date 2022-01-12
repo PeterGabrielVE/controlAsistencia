@@ -106,6 +106,9 @@
     <script src={{asset('assets/plugins/datatables/buttons-1.5.6/js/buttons.flash.min.js')}}></script>
     <script src={{asset('assets/plugins/datatables/buttons-1.5.6/js/buttons.print.min.js')}}></script>
     <script src={{asset('assets/plugins/datatables/ajax/libs/jszip-3.1.3/jszip.min.js')}}></script>
+    <script src={{asset('assets/plugins/datatables/pdfmake-0.1.36/pdfmake.min.js')}}></script>
+    <script src={{asset('assets/plugins/datatables/pdfmake-0.1.36/vfs_fonts.js')}}></script>
+
     <script src={{asset('assets/plugins/datatables/select-1.3.0/js/dataTables.select.min.js')}}></script>
 
     <script src={{asset('assets/plugins/bootstrap-fileinput/js/fileinput.js')}}></script>
