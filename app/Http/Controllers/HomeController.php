@@ -32,9 +32,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-         $asistencia = Asistencia::where('id_user',Auth::user()->id)->latest('id')->first();
-         //dd($asistencia);
-         return view('pages.dashboard1',compact('asistencia'));
+        if(Auth::user()->hasRole('fiscal')){
+            return redirect('report');
+        }else{
+            $asistencia = Asistencia::where('id_user',Auth::user()->id)->latest('id')->first();
+            return view('pages.dashboard1',compact('asistencia'));
+        }
+    
     }
 
 }
