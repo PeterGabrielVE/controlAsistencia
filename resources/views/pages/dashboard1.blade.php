@@ -57,6 +57,7 @@
             <div class="d-flex row row-eq-height my-3">
                 <div class="col-md-5">
                     <div class="card text-center">
+                    @if(!Auth::user()->hasRole('fiscal'))
                         <div class="p-4">
 
                                 <div class=" pt-2 pb-1" style="background-color:#f5f8fa">
@@ -114,12 +115,12 @@
                                     <input type="hidden" value="0" name="tipo">
                                     <a onclick="mostrarAsistencia()" class="btn btn-success col-6 mw-100">Registrar Entrada</a>
                                 @endif
-                            </form>
+                        
                         </div>
                     </div>
                 </div>
             </div>
-
+            @endif
         </div>
     </div>
 

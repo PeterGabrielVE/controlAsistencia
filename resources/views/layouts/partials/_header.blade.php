@@ -26,11 +26,11 @@
           <li class="treeview"><a href="{{url('home')}}">
                 <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Dashboard') }}</span></a>
           </li>
-
+       @if(!Auth::user()->hasRole('fiscal')) 
         <li class="treeview"><a href="{{ route('reporte/marcas') }}">
               <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Reporte de Marcas') }}</span></a>
         </li>
-
+        @endif
         @if(Auth::user()->hasRole('jefe') || Auth::user()->hasRole('supervisor'))
           <li class="treeview"><a href="{{url('reporte/empleados')}}">
                 <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Reporte Empleados') }}</span></a>
@@ -93,6 +93,8 @@
                 <ul class="treeview-menu">
                 </ul>
          </li>
+         @endif
+         @if(Auth::user()->hasRole('fiscal') || Auth::user()->hasRole('super'))
          <li class="treeview ">
                 <a href="#">
                     <i class="icon icon-circle-o gray-text s-18"></i> <span>{{ __('Reportes') }}</span>
@@ -109,15 +111,9 @@
                     </li>
                 </ul>
          </li>
-
+        @endif
 
     </ul>
-
-        @else
-            <!--<div>Acceso usuario</div>-->
-    @endif
-
-
 
 </section>
 </aside>

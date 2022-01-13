@@ -65,9 +65,13 @@ class User extends Authenticatable
         return $this->belongsTo('App\Building', 'id_edificio');
     }
 
-        public function rol_user()
+    public function rol_user()
     {
         return $this->belongsTo('App\RolUser','id','user_id');
     }
+
+    public function isAdmin() {
+        return $this->is_admin == true;
+      }
 
 }
