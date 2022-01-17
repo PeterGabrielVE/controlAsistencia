@@ -29,7 +29,8 @@ class SendMail extends Mailable
      */
     public function build()
     {   $user_detail = $this->user_detail;
-        return $this->view('pages.mail.register')->subject('Marcación exitosa - OPSONTIME');
+        
+        return $this->view('pages.mail.register')->subject($user_detail['tipo'].'/'.$user_detail['nombre'].'/'.\Carbon\Carbon::parse($user_detail['fecha'])->format('d/m/Y H:i:s'));
     }
 }
 ?>

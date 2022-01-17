@@ -14,7 +14,7 @@
     </div>
     <br>
     <div>
-		 <p>Este es un correo automatizado generado desde la plataforma OPSONTIME.cl</p>
+		 <p>Este es un correo automatizado generado desde la plataforma OPSONTIME</p>
     </div>
 </body>
 </html>
