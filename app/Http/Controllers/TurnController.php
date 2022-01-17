@@ -47,10 +47,10 @@ class TurnController extends Controller
         toastr()->success('¡Se ha registrado exitosamente!');
         return response()->json(['message'=>'Turno registrado correctamente']);
 
-    }catch (\Exception $e){
+        }catch (\Exception $e){
         toastr()->success('¡Ocurrió un problema!');
         return redirect()->back();
-     }
+        }
     }
 
     /**
