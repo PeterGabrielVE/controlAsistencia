@@ -60,6 +60,9 @@ JORNADA</h1>
                                     <th><b>ENTRADA</b></th>
                                     <th><b>ATRASO</b></th>
                                     <th><b>SALIDA</b></th>
+                                    @if(Auth::user()->hasRole('fiscal'))
+                                    <th></th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody id="tbody">
@@ -82,6 +85,14 @@ JORNADA</h1>
                                                     <td>@if(isset($a->marca) && $a->marca != '' && $a->marca != null)<a target="_blank"  class="enlace_marca" href="{{ route('asistencia.edit',$a->marca) }}" title="Mostrar">
                                                         {{ obtener_salida($a->marca) }}
                                                     </a>@endif </td>
+                                                    @if(Auth::user()->hasRole('fiscal'))
+                                                    <td>
+                                                        @if($a->marca!= ''  && $a->marca != null)
+                                                            <a target="_blank" href="{{ route('asistencia.show',$a->marca) }}" class="btn btn-default btn-sm" title="Mostrar">
+                                                            <i class="icon-eye text-info"></i></a>
+                                                        @endif
+                                                    </td>
+                                                    @endif
                                                 </tr>
 
                                             @endif

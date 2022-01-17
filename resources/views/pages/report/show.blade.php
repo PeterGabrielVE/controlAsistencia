@@ -32,7 +32,7 @@ MARCAS</h1>
                     <div class="row mb-4">
                     <div class="form-group col-3 m-0">
                             {!! Form::label('name', 'Nombre', ['class'=>'col-form-label s-12']) !!}
-                            {!! Form::text('name', $asistencia->user->fullname.' '. $asistencia->user->last_name ?? null, ['class'=>'form-control r-0 light s-12','id'=>'name','disabled']) !!}
+                            {!! Form::text('name', $asistencia->user->fullname ?? null .' '. $asistencia->user->last_name ?? null, ['class'=>'form-control r-0 light s-12','id'=>'name','disabled']) !!}
                             <span class="descripcion_span"></span>
                         </div>
                         <div class="form-group col-3 m-0">
