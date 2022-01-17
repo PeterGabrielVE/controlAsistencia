@@ -31,13 +31,13 @@ class PlannerController extends Controller
     public function create($id)
     {
         switch ($id) {
-            case 'seamanal':
+            case 'semanal':
                 $type = 1;
                 break;
             case 'mensual':
                 $type = 2;
                 break;
-            case 'perosnalizado':
+            case 'personalizado':
                 $type = 3;
                 break;
             default:
@@ -45,7 +45,7 @@ class PlannerController extends Controller
                 break;
         }
         $turns = Turn::get()->pluck('detalles','id')->prepend('Seleccione...','');
-        $types = Type_Planner::get()->pluck('nombre','id')->prepend('Seleccione...','');
+        $types = Type_Planner::where('id',1)->pluck('nombre','id')->prepend('Seleccione...','');
         return view('pages.planner.create',compact('turns','types','type'));
     }
 

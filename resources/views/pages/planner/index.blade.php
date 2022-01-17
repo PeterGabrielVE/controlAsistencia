@@ -29,8 +29,6 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{ route('planificador.create','semanal') }}">Semanal</a>
-                                    <a class="dropdown-item" href="{{ route('planificador.create','mensual') }}">Mensual</a>
-                                    <a class="dropdown-item" href="{{ route('planificador.create','personalizado') }}">Personalizado</a>
                                 </div>
                                 </div>
                             </div>

@@ -31,7 +31,7 @@
 							</div>
                             <div class="form-group col-4 m-0">
 								{!! Form::label('estado', 'Estado', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::select('Estado',[''=>'Seleccione...','0'=>'Activo','1'=>'Inactivo'], null, ['class'=>'form-control r-0 light s-12','id'=>'estado','required']) !!}
+								{!! Form::select('Estado',[''=>'Seleccione...','0'=>'Activo','1'=>'Inactivo'],'0', ['class'=>'form-control r-0 light s-12','id'=>'estado','required']) !!}
 								<span class="estado_span"></span>
 							</div>
                     </div>
