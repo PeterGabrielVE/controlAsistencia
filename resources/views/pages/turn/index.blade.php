@@ -33,10 +33,10 @@
                             <thead>
                                 <tr>
                                     <th><b>ID</b></th>
+                                    <th><b>NOMBRE</b></th>
                                     <th><b>INGRESO</b></th>
                                     <th><b>INGRESO MÁXIMO</b></th>
                                     <th><b>COLACIÓN</b></th>
-                                    <th><b>DETALLES</b></th>
                                     <th><b>SALIDA</b></th>
                                     <th><b>HORAS TRABAJO</b></th>
                                     <th><b>TIEMPO COLACIÓN</b></th>
