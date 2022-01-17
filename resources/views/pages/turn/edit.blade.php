@@ -11,6 +11,11 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
+							<div class="form-group col-4 m-0" id="description_group">
+								{!! Form::label('description', 'Nombre', ['class'=>'col-form-label s-12']) !!}
+								{!! Form::text('detalles', null, ['class'=>'form-control r-0 light s-12','id'=>'_detalles','required']) !!}
+								<span class="description_span"></span>
+							</div>
 							<div class="form-group col-4 m-0" id="ingreso_group">
 								{!! Form::label('ingreso', 'Ingreso', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::time('ingreso', null, ['class'=>'form-control r-0 light s-12','id'=>'_ingreso']) !!}
@@ -26,37 +31,30 @@
 								{!! Form::time('colacion', null, ['class'=>'form-control r-0 light s-12','id'=>'_colacion']) !!}
 								<span class="colacion_span"></span>
 							</div>
-						</div>
-						<div class="form-row">
-                        <div class="form-group col-3 m-0" id="salida_group">
+                        <div class="form-group col-4 m-0" id="salida_group">
 								{!! Form::label('salida', 'Salida', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::time('salida', null, ['class'=>'form-control r-0 light s-12','id'=>'_salida']) !!}
 								<span class="salida_span"></span>
 							</div>
-                            <div class="form-group col-3 m-0" id="ingreso_max_group">
+                            <div class="form-group col-4 m-0" id="ingreso_max_group">
 								{!! Form::label('horas_trabajo', 'Horas Trabajo', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::number('horas_trabajo', null, ['class'=>'form-control r-0 light s-12','id'=>'_horas_trabajo']) !!}
 								<span class="ingreso_span"></span>
 							</div>
-                            <div class="form-group col-3 m-0" id="tiempo_colacion_group">
+                            <div class="form-group col-4 m-0" id="tiempo_colacion_group">
 								{!! Form::label('tiempo_colacion', 'Tiempo Colación', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::number('tiempo_colacion', null, ['class'=>'form-control r-0 light s-12','id'=>'_tiempo_colacion']) !!}
 								<span class="tiempo_colacion_span"></span>
 							</div>
-                            <div class="form-group col-3 m-0" id="tipo_colacion_group">
+                            <div class="form-group col-4 m-0" id="tipo_colacion_group">
 								{!! Form::label('tiempo_colacion', 'Tipo De Colación', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::select('tipo_colacion_id',$collations, null, ['class'=>'form-control r-0 light s-12','id'=>'_tipo_colacion_id']) !!}
 								<span class="tipo_colacion_span"></span>
 							</div>
-                            <div class="form-group col-3 m-0" id="tipo_turno_group">
+                            <div class="form-group col-4 m-0" id="tipo_turno_group">
 								{!! Form::label('tiempo_colacion', 'Tipo', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::select('tipo_turno',$tipos, null, ['class'=>'form-control r-0 light s-12','id'=>'_tipo_turno']) !!}
 								<span class="tipo_turno_span"></span>
-							</div>
-                            <div class="form-group col-9 m-0" id="description_group">
-								{!! Form::label('description', 'Detalles', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::textarea('detalles', null, ['class'=>'form-control r-0 light s-12','id'=>'_detalles','rows'=>'3']) !!}
-								<span class="description_span"></span>
 							</div>
 						</div>
 					</div>

@@ -48,10 +48,10 @@
                                 @foreach ($turns as $p)
                                 <tr class="tbody">
                                     <td>{{ $p->id ?? '' }}</td>
+                                    <td>{{ $p->detalles ?? '' }}</td>
                                     <td>{{ $p->ingreso ?? '' }}</td>
                                     <td>{{ $p->ingreso_max ?? '' }}</td>
                                     <td>{{ $p->colacion ?? '' }}</td>
-                                    <td>{{ $p->detalles ?? '' }}</td>
                                     <td>{{ $p->salida ?? '' }}</td>
                                     <td>{{ $p->horas_trabajo ?? '' }}</td>
                                     <td>{{ $p->tiempo_colacion ?? '' }}</td>
