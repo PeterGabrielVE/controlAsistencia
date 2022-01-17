@@ -25,12 +25,12 @@ MARCAS</h1>
                                     </div>
                                     <div class="form-group col-3 m-0">
                                         {!! Form::label('since', 'Desde', ['class'=>'col-form-label s-12']) !!}
-                                        {!! Form::date('since', $since ?? null, ['class'=>'form-control r-0 light s-12','id'=>'since']) !!}
+                                        {!! Form::date('since', $since ?? date("Y").'-01-01', ['class'=>'form-control r-0 light s-12','id'=>'since']) !!}
                                         <span class="descripcion_span"></span>
                                     </div>
                                     <div class="form-group col-3 m-0">
                                         {!! Form::label('until', 'Hasta', ['class'=>'col-form-label s-12']) !!}
-                                        {!! Form::date('until', $until ?? null, ['class'=>'form-control r-0 light s-12','id'=>'until']) !!}
+                                        {!! Form::date('until', $until ?? date("Y").'-12-31', ['class'=>'form-control r-0 light s-12','id'=>'until']) !!}
                                         <span class="descripcion_span"></span>
                                     </div>
                                     <div class="form-group col-3 m-0 p-2">

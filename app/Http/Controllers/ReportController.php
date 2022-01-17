@@ -27,7 +27,7 @@ class ReportController extends Controller
         ->orderBy('fullname')
         ->select(DB::raw("CONCAT(fullname,' ',last_name) AS name"),'id')
         ->pluck('name','id')->prepend('Seleccionar Todo…', '');
-        $asistencia = Asistencia::orderBy('fecha','DESC')->get();
+        $asistencia = Asistencia::whereBetween('fecha',[date("Y").'-01-01',date("Y").'-12-31'])->orderBy('fecha','DESC')->get();
         return view('pages.report.index',compact('asistencia','users'));
     }
 
