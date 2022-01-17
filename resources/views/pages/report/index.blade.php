@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-<h1 class="nav-title text-white"> <i class="icon icon-documents3 text-blue s-18"></i>
+<h1 class="nav-title text-white"> <i class="icon icon-documents2 text-white s-18"></i>
 MARCAS</h1>
 @endsection
 @section('maincontent')
