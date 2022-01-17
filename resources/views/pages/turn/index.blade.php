@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-<h1 class="nav-title text-white"> <i class="icon icon-documents3 text-blue s-18"></i>Turnos</h1>
+<h1 class="nav-title text-white"> Configuración > <i class="icon icon-documents2 text-white s-18"></i>Turnos</h1>
 @endsection
 @section('maincontent')
 {{-- modal create --}}
