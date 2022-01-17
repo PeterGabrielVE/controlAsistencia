@@ -88,13 +88,15 @@
     
         @endif
         @if(Auth::user()->hasRole('fiscal') || Auth::user()->hasRole('super'))
-        <li class="treeview ">
+        <li class="treeview @if(Auth::user()->hasRole('fiscal')) active @endif">
                 <a href="#">
                     <i class="icon icon-circle-o gray-text s-18"></i> <span>{{ __('Reportes') }}</span>
+                    @if(!Auth::user()->hasRole('fiscal'))
                     <i class="icon icon-angle-left s-18 pull-right"></i>
+                    @endif
                 </a>
                 <ul class="treeview-menu">
-                    <li class="treeview"><a href="{{ route('report.index') }}">
+                    <li class="treeview"><a class="active" href="{{ route('report.index') }}">
                         <i class="icon icon-circle-o gray-text s-14"></i>
                         <span>{{ __('Marcaje') }}</span></a>
                     </li>

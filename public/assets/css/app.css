@@ -9801,7 +9801,7 @@ a.text-dark:hover {
 [class*=" icon-"],
 [class^=icon-] {
     font-family: paperIcons!important;
-    speak: none;
+    /*speak: none;*/
     font-style: normal;
     font-weight: 400;
     font-variant: normal;
@@ -27107,7 +27107,7 @@ ul.list-group.list-group-hover li:hover {
     text-shadow: 0 0 7px #333
 }
 
-@media screen and (min-width:0 \0) {
+@media screen and (min-width:0) {
     .trumbowyg-box-blur .trumbowyg-editor *,
     .trumbowyg-box-blur .trumbowyg-editor::before {
         color: rgba(200, 200, 200, .6)!important
@@ -27680,7 +27680,7 @@ body.trumbowyg-body-fullscreen {
     text-shadow: 0 0 7px #ccc
 }
 
-@media screen and (min-width:0 \0) {
+@media screen and (min-width:0) {
     .trumbowyg-dark .trumbowyg-box.trumbowyg-box-blur .trumbowyg-editor *,
     .trumbowyg-dark .trumbowyg-box.trumbowyg-box-blur .trumbowyg-editor::before {
         color: rgba(20, 20, 20, .6)!important
@@ -36959,4 +36959,15 @@ html[dir=rtl] .form-group.has-icon input {
 div.dt-buttons{
     position:relative !important;
     float:right !important;
+}
+
+
+.btn_opson{
+    background-color:#f95c10 !important;
+    font-size:14px !important;
+}
+
+.btn_opson:hover{
+    background-color:#e35511 !important;
+    color : #FFFFFF !important;
 }
