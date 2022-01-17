@@ -85,17 +85,10 @@
                 </li>
             </ul>
         </li>
+    
+        @endif
+        @if(Auth::user()->hasRole('fiscal') || Auth::user()->hasRole('super'))
         <li class="treeview ">
-                <a href="#">
-                    <i class="icon icon-data_usage text-lime s-18"></i> <span>Gestión Interna</span>
-                    <i class="icon icon-angle-left s-18 pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                </ul>
-         </li>
-         @endif
-         @if(Auth::user()->hasRole('fiscal') || Auth::user()->hasRole('super'))
-         <li class="treeview ">
                 <a href="#">
                     <i class="icon icon-circle-o gray-text s-18"></i> <span>{{ __('Reportes') }}</span>
                     <i class="icon icon-angle-left s-18 pull-right"></i>

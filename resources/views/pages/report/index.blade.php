@@ -15,6 +15,7 @@ MARCAS</h1>
         <div class="animated fadeInUpShort">
             <div class="card">
                 <div class="card-body">
+                        @if(!Route::is('reporte/marcas'))
                         <form method="GET" action="{{ route('report.filters.marcas') }}">
                         <div class="row mb-4">
                                     <div class="form-group col-3 m-0">
@@ -39,6 +40,7 @@ MARCAS</h1>
                             
                         </div>
                         </form>
+                        @endif
                     <div id="table" class="table-responsive" style="overflow-x:auto;">
                     <table id="mydatatable" class="table table-bordered table-hover table-sm text-12" data-page-length='100' style="font-size:14px;width: 100%;border-collapse: collapse;">
                             <thead>
