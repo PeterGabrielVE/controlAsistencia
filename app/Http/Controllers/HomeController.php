@@ -32,6 +32,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //dd(Auth::user()->status);
+        if(Auth::user()->status != 1){
+            Session::flash('message-error','Esta cuenta se encuentra inactiva.');
+            return redirect()->back();
+        }
         if(Auth::user()->hasRole('fiscal')){
             return redirect('report');
         }else{
