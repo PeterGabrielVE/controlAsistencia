@@ -33,7 +33,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button class="btn btn-primary" onclick="notificacion()">
+                                <button class="btn btn-primary" type="submit">
                                     {{ __('Enviar link de restablecimiento') }}
                                 </button>
                             </div>
@@ -66,7 +66,7 @@
         <p class="forget-pass">Atrás para iniciar sesión</p>
     </a>  
     <div class="form-group">
-        <input  type="submit" onclick="notificacion()" class="btn btn-primary btn-lg btn-block" value="Enviar link de restablecimiento">
+        <input type="submit" onclick="notificacion()" class="btn btn-primary btn-lg btn-block" value="Enviar link de restablecimiento">
     </div>
 </form>
 <script>
