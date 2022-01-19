@@ -33,7 +33,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button class="btn btn-primary" onclick="notificacion()">
                                     {{ __('Enviar link de restablecimiento') }}
                                 </button>
                             </div>
@@ -66,6 +66,11 @@
         <p class="forget-pass">Atrás para iniciar sesión</p>
     </a>  
     <div class="form-group">
-        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Enviar link de restablecimiento">
+        <input  type="submit" onclick="notificacion()" class="btn btn-primary btn-lg btn-block" value="Enviar link de restablecimiento">
     </div>
 </form>
+<script>
+    function notificacion(){
+        toastr.info('Si tu correo esta registrado recibiras un link de cambio de contraseña, si no lo encuentras en bandeja de entrada, te sugerimos revisar la bandeja de SPAM.');
+    }
+</script>

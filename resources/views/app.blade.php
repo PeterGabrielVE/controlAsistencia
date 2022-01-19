@@ -13,6 +13,7 @@
     <title>{{config('app.name')}}</title>
     <!-- CSS -->
     <link rel="stylesheet" href=  {{asset('assets/css/app.css')}}>
+    <link rel="stylesheet" href=  {{asset('assets/plugins/toastr/toastr.css')}}>
     <style>
         .loader {
             position: fixed;
@@ -51,8 +52,10 @@
     --- Footer Part - Use Jquery anywhere at page.
     --- http://writing.colin-gourlay.com/safely-using-ready-before-including-jquery/
     -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
         (function($,d){$.each(readyQ,function(i,f){$(f)});$.each(bindReadyQ,function(i,f){$(d).bind("ready",f)})})(jQuery,document)
     </script>
     <script src={{asset('assets/js/app.js')}}></script>
+    <script src={{asset('assets/plugins/toastr/toastr.js')}}></script>
 </html>
