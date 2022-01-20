@@ -35,7 +35,7 @@ class ReportController extends Controller
 
         ini_set('max_execution_time', 300);
         set_time_limit(0);
-        $asistencia = DB::table('jornada')->get();
+        $asistencia = DB::table('jornada')->whereBetween('fecha',[date("Y").'-01-01',date("Y").'-12-31'])->get();
         $primer = DB::table('jornada')->first();
         $ultimo = DB::table('jornada')->orderBy('fecha', 'desc')->first();
         $inicio = strtotime($primer->fecha);
