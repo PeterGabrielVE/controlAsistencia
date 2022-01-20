@@ -41,7 +41,7 @@ JORNADA</h1>
                                         <span class="descripcion_span"></span>
                                     </div>
                                     <div class="form-group col-3 m-0 p-2">
-                                        <button class="btn btn-info form-control s-12 mt-4" type="submit">Buscar</button>
+                                        <button class="btn btn-info form-control btn_opson s-12 mt-4" type="submit">Buscar</button>
                                     
                                     </div>
                             
