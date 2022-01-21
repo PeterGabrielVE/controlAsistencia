@@ -155,7 +155,7 @@ $(document).ready(function() {
     $('#mydatatable thead tr').clone(true).appendTo( '#mydatatable thead' );
             $('#mydatatable thead tr:eq(1) th').each( function (i) {
                 var title = $(this).text();
-                $(this).html( '<input type="text" class="form-control" placeholder="'+title+'" />' );
+                $(this).html( '<input type="text" class="form-control" placeholder="'+title+'" style="font-size:0.5rem"  />' );
                 $( 'input', this ).on( 'keyup change', function () {
                     if ( table.column(i).search() !== this.value ) {
                         table.column(i).search( this.value ).draw();

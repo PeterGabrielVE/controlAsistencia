@@ -19,16 +19,7 @@
     <div class="container-fluid animatedParent animateOnce my-3">
         <div class="animated fadeInUpShort">
             <div class="card">
-                <div class="form-group">
-                    <div class="card-header white">
-                        <div class="form-group row">
-                            <div class="col-sm-10" style="margin-top: 5px;">
-                                <h6> {{ __('LISTA USUARIOS') }} </h6>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+            
                 <div class="card-body">
                     <div id="table" class=" table-responsive">
                         <table id="example3" class="table table-bordered table-hover table-sm" data-order='[[ 0, "desc" ]]' data-page-length='100' style="width: 100%;border-collapse: collapse;">
