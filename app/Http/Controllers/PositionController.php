@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Position;
-
+use App\User;
 class PositionController extends Controller
 {
     /**
@@ -102,15 +102,21 @@ class PositionController extends Controller
      */
     public function destroy($id)
     {
-        try{
+       try{
+
+        $user = User::where('position',$id)->get();
+        if(count($user) > 0){
+            toastr()->error('¡No se puede eliminar! Existen usuarios con esta posición.');
+            return response()->json(['message'=>'¡No se puede eliminar! Existen usuarios con esta posición.']);
+        }
         $position = Position::find($id);
         $position->delete();
         toastr()->success('¡Se ha eliminado exitosamente!');
         return response()->json(['message'=>'Posición eliminado correctamente']);
 
-    }catch (\Exception $e){
-        toastr()->success('¡Ocurrió un problema!');
-        return redirect()->back();
-     }
+        }catch (\Exception $e){
+            toastr()->error('¡Ocurrió un problema!');
+            return redirect()->back();
+        }
     }
 }

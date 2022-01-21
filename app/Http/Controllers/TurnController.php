@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Turn;
 use App\Models\Type_Turn;
 use App\Models\Type_Collation;
+use App\Models\Planner;
 
 class TurnController extends Controller
 {
@@ -105,7 +106,25 @@ class TurnController extends Controller
      */
     public function destroy($id)
     {
+        $existe = false;
+        $plann = Planner::select('planificacion')->get();
+        foreach($plann as $v){
+            //$search = array_search($id,$v);
+            $array = explode(" ", $v->planificacion);
+            $search = array_search($id,$array);
+            //dd($search);
+            if($existe === true){
+                break;
+            }
+            $existe = $search;
+            
+        }
+        //dd($existe);
         try{
+        if($existe){
+            toastr()->error('¡No se puede eliminar! Existen planificaciones con esta turno.');
+            return response()->json(['message'=>'¡No se puede eliminar! Existen planificaciones con esta turno.']);
+        }
         $turn =Turn::find($id);
         $turn->delete();
         toastr()->success('¡Se ha eliminado exitosamente!');
