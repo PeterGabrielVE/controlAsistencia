@@ -107,21 +107,10 @@ class TurnController extends Controller
     public function destroy($id)
     {
         $existe = false;
-        $plann = Planner::select('planificacion')->get();
-        foreach($plann as $v){
-            //$search = array_search($id,$v);
-            $array = explode(" ", $v->planificacion);
-            $search = array_search($id,$array);
-            //dd($search);
-            if($existe === true){
-                break;
-            }
-            $existe = $search;
-            
-        }
-        //dd($existe);
+        $plann = Planner::where('planificacion','like','%'.$id.',')->orWhere('planificacion','like','%'.','.$id.'%')->get();
+    
         try{
-        if($existe){
+        if(count($plann) > 0){
             toastr()->error('¡No se puede eliminar! Existen planificaciones con esta turno.');
             return response()->json(['message'=>'¡No se puede eliminar! Existen planificaciones con esta turno.']);
         }
