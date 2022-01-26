@@ -107,6 +107,11 @@
                 </ul>
          </li>
         @endif
+        @if(Auth::user()->hasRole('super')) 
+        <li class="treeview"><a href="{{ route('form.create') }}">
+            <i class="icon icon-compass gray-text s-18"></i><span>{{ __('Formulario') }}</span></a>
+        </li>
+        @endif
 
     </ul>
 

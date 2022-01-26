@@ -90,7 +90,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('groupByUser/{id}','UserController@getGroup');
     Route::post('deleteGroupUser','UserController@deleteGroupUser');
 	Route::get("getGroupUser", "UserController@getGroupUser")->name("getGroupUser");
-
+	Route::get("form/create", "FormController@create")->name("form.create");
 
 });
 
