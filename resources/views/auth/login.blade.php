@@ -16,7 +16,8 @@
                     {{ csrf_field() }}
                     <div class="form-group has-icon">
                         <i class="icon-vcard"></i>
-                        {!! Form::text('rut', null, ['class'=>'form-control form-control-lg', 'placeholder'=>'RUT', 'require']) !!}
+                        {!! Form::text('rut2', null, ['class'=>'form-control form-control-lg', 'placeholder'=>'RUT', 'id'=>'rut','require']) !!}
+                        {!! Form::hidden('rut', null, ['class'=>'form-control form-control-lg', 'placeholder'=>'RUT', 'id'=>'rut2','require']) !!}
                         @error('rut')
                         <span class="help-block text-danger">
                             {{ $message }}
@@ -53,6 +54,17 @@
     </div>
 </div>
 <script>
+
+$(document).ready(function() {
+    
+    $('#rut').on('change', function() {
+        let rut = $(this).val();
+        $('#rut2').val(rut);
+        Rut(rut);
+    });
+
+
+})
   function mostrarForm(key){ 
       switch (key) {
         case 'passwordReset':
