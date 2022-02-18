@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Business;
+use Caffeinated\Shinobi\Models\Role;
+use Caffeinated\Shinobi\Models\Permission;
 use Session;
 use Redirect;
 
-class BusinessController extends Controller
+class IncidentController extends Controller
 {
+    private $permissions;
 
     public function __construct()
     {
+        $this->permissions = Permission::get()->pluck('name','id');
     }
 
     /**
@@ -21,8 +24,9 @@ class BusinessController extends Controller
      */
     public function index()
     {
-        $business = Business::all();
-        return view('pages.business.index',compact('business'));
+        $permissions = $this->permissions;
+        $roles = Role::all();
+        return view('pages.rol.index',compact('roles','permissions'));
     }
 
     /**
@@ -44,7 +48,8 @@ class BusinessController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $rol = Business::create($data);
+        $rol = Role::create($data);
+        $rol->syncPermissions($data['permits']);
         return response()->json(['message'=>'Rol registrado correctamente']);
     }
 
@@ -54,9 +59,9 @@ class BusinessController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Role $rol)
     {
-        return response()->json();
+        return response()->json($rol);
     }
 
     /**
@@ -65,8 +70,16 @@ class BusinessController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Role $rol)
     {
+        $rol = $rol;
+        if ($rol->special == 'all-access') {
+            $rol->special = 1;
+        }else{
+            $rol->special = 2;
+        }
+        $permissions = $this->permissions;
+        return view('pages.rol.edit', compact('rol','permissions'));
     }
 
     /**
@@ -79,6 +92,12 @@ class BusinessController extends Controller
     public function update(Request $request, $id)
     {
 
+        $rol = Role::find($id);
+        $rol->update($request->all());
+        $rol->syncPermissions($request->all('permits'));
+        $rol->save();
+        Session::flash('message-success','El rol '. $request->name.' fue editado correctamente.');
+        return Redirect::to('rol');
     }
 
     /**
@@ -87,8 +106,9 @@ class BusinessController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy(Role $rol)
     {
+        $rol->delete();
         return response()->json(['message'=>'Rol eliminado correctamente']);
     }
 }

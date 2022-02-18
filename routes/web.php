@@ -41,6 +41,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('typeTurn', 'TypeTurnController')->middleware('has.role:super');
 	Route::resource('planificador', 'PlannerController')->middleware('has.role:super');
     Route::resource('asistencia', 'AsistenciaController');
+	Route::resource('business', 'BusinessController');
+	Route::resource('incident', 'IncidentController');
 	// home
 	Route::get('/home', 'HomeController@index')->name('home');
 

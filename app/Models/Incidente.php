@@ -4,17 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Business extends Model
+class Incidente extends Model
 {
   /**
     * The attributes that are mass assignable.
     *
     * @var array
     */
-   protected $table = 'businesses';
+   protected $table = 'incidente';
 
    protected $fillable = [
-        'id','rut','name','direction','flat','phone','mail','commune','town','id_region','updated_at'
+        'date','comments','registered_by',
    ];
 
    public $timestamps  = false;
