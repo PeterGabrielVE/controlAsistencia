@@ -11,24 +11,23 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div class="form-group col-4 m-0" id="description_group">
+							<div class="form-group col-4 m-0">
 								{!! Form::label('lbl_name', 'Nombre', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::text('name', null, ['class'=>'form-control r-0 light s-12','id'=>'_name','required']) !!}
 								<span class="description_span"></span>
 							</div>
-							<div class="form-group col-4 m-0" id="ingreso_group">
+							<div class="form-group col-4 m-0">
 								{!! Form::label('lbl_rut', 'RUT', ['class'=>'col-form-label s-12']) !!}
 								{!! Form::time('rut', null, ['class'=>'form-control r-0 light s-12','id'=>'_rut']) !!}
 								<span class="ingreso_span"></span>
 							</div>
-                            <div class="form-group col-4 m-0" id="ingreso_max_group">
-								{!! Form::label('ingreso', 'Ingreso Máximo', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::time('ingreso_max', null, ['class'=>'form-control r-0 light s-12','id'=>'_ingreso_max']) !!}
-								<span class="ingreso_span"></span>
+                            <div class="form-group col-4 m-0"
+								{!! Form::label('lb_email', 'Correo', ['class'=>'col-form-label s-12']) !!}
+								{!! Form::text('email', null, ['class'=>'form-control r-0 light s-12','id'=>'_email']) !!}
 							</div>
                             <div class="form-group col-4 m-0" id="colacion_group">
-								{!! Form::label('colacion', 'Colación', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::time('colacion', null, ['class'=>'form-control r-0 light s-12','id'=>'_colacion']) !!}
+								{!! Form::label('colacion', 'Piso', ['class'=>'col-form-label s-12']) !!}
+								{!! Form::text('flat', null, ['class'=>'form-control r-0 light s-12','id'=>'_flat']) !!}
 								<span class="colacion_span"></span>
 							</div>
                         <div class="form-group col-4 m-0" id="salida_group">
