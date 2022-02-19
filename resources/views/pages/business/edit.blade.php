@@ -26,13 +26,13 @@
 								{!! Form::text('email', null, ['class'=>'form-control r-0 light s-12','id'=>'_email']) !!}
 							</div>
                             <div class="form-group col-4 m-0" id="colacion_group">
-								{!! Form::label('colacion', 'Piso', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::text('flat', null, ['class'=>'form-control r-0 light s-12','id'=>'_flat']) !!}
+								{!! Form::label('lbl_phone', 'Teléfono', ['class'=>'col-form-label s-12']) !!}
+								{!! Form::text('phone', null, ['class'=>'form-control r-0 light s-12','id'=>'_phone']) !!}
 								<span class="colacion_span"></span>
 							</div>
                         <div class="form-group col-4 m-0" id="salida_group">
-								{!! Form::label('salida', 'Salida', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::time('salida', null, ['class'=>'form-control r-0 light s-12','id'=>'_salida']) !!}
+								{!! Form::label('lbl_flat', 'Piso', ['class'=>'col-form-label s-12']) !!}
+								{!! Form::time('flat', null, ['class'=>'form-control r-0 light s-12','id'=>'_flat']) !!}
 								<span class="salida_span"></span>
 							</div>
                             <div class="form-group col-4 m-0" id="ingreso_max_group">

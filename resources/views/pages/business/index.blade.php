@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-<h1 class="nav-title text-white"> Configuración > <i class="icon icon-documents2 text-white s-18"></i>Turnos</h1>
+<h1 class="nav-title text-white"> Configuración > <i class="icon icon-building text-white s-18"></i>Empresas</h1>
 @endsection
 @section('maincontent')
 {{-- modal create --}}
@@ -35,12 +35,12 @@
                                     <th><b>ID</b></th>
                                     <th><b>NOMBRE</b></th>
                                     <th><b>RUT</b></th>
+                                    <th><b>TELÉFONO</b></th>
+                                    <th><b>CORREO</b></th>
                                     <th><b>PISO</b></th>
-                                    <th><b>COLACIÓN</b></th>
-                                    <th><b>SALIDA</b></th>
-                                    <th><b>HORAS TRABAJO</b></th>
-                                    <th><b>TIEMPO COLACIÓN</b></th>
-                                    <th><b>TIPO</b></th>
+                                    <th><b>CIUDAD</b></th>
+                                    <th><b>COMUNA</b></th>
+                                    <th><b>REGIÓN</b></th>
                                     <th><b>OPCIONES</b></th>
                                 </tr>
                             </thead>
@@ -48,18 +48,18 @@
                                 @foreach ($business as $p)
                                 <tr class="tbody">
                                     <td>{{ $p->id ?? '' }}</td>
-                                    <td>{{ $p->detalles ?? '' }}</td>
-                                    <td>{{ $p->ingreso ?? '' }}</td>
-                                    <td>{{ $p->ingreso_max ?? '' }}</td>
-                                    <td>{{ $p->colacion ?? '' }}</td>
-                                    <td>{{ $p->salida ?? '' }}</td>
-                                    <td>{{ $p->horas_trabajo ?? '' }}</td>
-                                    <td>{{ $p->tiempo_colacion ?? '' }}</td>
-                                    <td>{{ $p->tipo->name ?? '' }}</td>
+                                    <td>{{ $p->name ?? '' }}</td>
+                                    <td>{{ $p->rut ?? '' }}</td>
+                                    <td>{{ $p->phone ?? '' }}</td>
+                                    <td>{{ $p->email ?? '' }}</td>
+                                    <td>{{ $p->flat ?? '' }}</td>
+                                    <td>{{ $p->town ?? '' }}</td>
+                                    <td>{{ $p->commune ?? '' }}</td>
+                                    <td>{{ $p->id_region ?? '' }}</td>
                                     <td class="text-center">
-                                    {!! Form::open(['route'=>['turn.destroy',$p->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
+                                    {!! Form::open(['route'=>['business.destroy',$p->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
                                         
-                                        <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('turn.edit',$p->id) }}', '{{ route('turn.update',$p->id) }}')">
+                                        <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('business.edit',$p->id) }}', '{{ route('business.update',$p->id) }}')">
                                             <i class="icon-pencil text-info"></i>
                                         </a>
                                         <button class="btn btn-default btn-sm" onclick="return confirm('¿Realmente deseas borrar el registro?')">
