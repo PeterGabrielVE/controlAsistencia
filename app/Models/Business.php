@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 <?php
 
 namespace App\Models;
@@ -26,4 +24,3 @@ class Business extends Model
     */
 
 }
->>>>>>> Stashed changes

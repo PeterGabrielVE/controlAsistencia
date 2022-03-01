@@ -4,13 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Models\Business;
-<<<<<<< Updated upstream
-use Caffeinated\Shinobi\Models\Role;
-use Image;
-=======
 use App\Region;
 use App\Commune;
->>>>>>> Stashed changes
 use Session;
 use Redirect;
 use DB;
@@ -35,20 +30,10 @@ class BusinessController extends Controller
      */
     public function index()
     {
-<<<<<<< Updated upstream
-        $roles = $this->role->get()->pluck('name', 'slug')->prepend('Seleccione...','');
-        $status = UsersStatus::get()->pluck('name', 'id')->prepend('Seleccione...','');
-        $positions = Position::get()->pluck('name', 'id')->prepend('Seleccione...','');
-        $grupos = Group::get()->pluck('group', 'id')->prepend('Seleccione...','');
-        $users = $this->user->all();
-
-        return view('pages.user.index', compact('users','status','roles','positions','grupos'));
-=======
         $business = Business::all();
         $regions = Region::get()->sortBy('name')->pluck('name','id')->prepend('Seleccione...','');
         $communes = Commune::get()->sortBy('name')->pluck('name','id')->prepend('Seleccione...','');
         return view('pages.business.index',compact('business','regions','communes'));
->>>>>>> Stashed changes
     }
 
     /**
