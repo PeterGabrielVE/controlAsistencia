@@ -1854,7 +1854,7 @@ var datetimepickerFactory = function ($) {
 						options.onSelectDate.call(datetimepicker, _xdsoft_datetime.currentTime, datetimepicker.data('input'), xdevent);
 					}
 
-					datetimepicker.data('changed', true);
+					datetimepicker.data('d', true);
 					datetimepicker.trigger('xchange.xdsoft');
 					datetimepicker.trigger('changedatetime.xdsoft');
 					if ((timerclick > 1 || (options.closeOnDateSelect === true || (options.closeOnDateSelect === false && !options.timepicker))) && !options.inline) {
