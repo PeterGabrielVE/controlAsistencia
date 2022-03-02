@@ -66,7 +66,24 @@
 	$( document ).ready(function() {
 		$('#id_region').on("click change", function(e) {
 			let region = $(this).val();
-			console.log(region)
+			$.ajax({
+				url:'searchCommunes',
+				data:{'region_id':region},
+				type:'get',
+				success: function (response) {
+							console.log(response);
+				},
+				statusCode: {
+					404: function() {
+						alert('web not found');
+					}
+				},
+				error:function(x,xs,xt){
+					//nos dara el error si es que hay alguno
+					window.open(JSON.stringify(x));
+					//alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
+				}
+			});
 		})
 	});
 	

@@ -93,7 +93,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('deleteGroupUser','UserController@deleteGroupUser');
 	Route::get("getGroupUser", "UserController@getGroupUser")->name("getGroupUser");
 	Route::get("form/create", "FormController@create")->name("form.create");
-
+	Route::get('searchCommunes','BusinessController@searchCommunes');
 });
 
 

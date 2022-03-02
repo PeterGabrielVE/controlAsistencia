@@ -95,4 +95,10 @@ class BusinessController extends Controller
     {
         return response()->json(['message'=>'Rol eliminado correctamente']);
     }
+
+    public function searchCommunes(Request $req)
+    {
+        $communes = Commune::where('region_id',$req->region_id)->get()->sortBy('name')->pluck('name','id')->prepend('Seleccione...','');
+        return response()->json($communes);
+    }
 }
