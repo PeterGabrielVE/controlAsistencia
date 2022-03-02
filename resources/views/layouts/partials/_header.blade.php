@@ -83,6 +83,16 @@
                         <i class="icon icon-equalizer gray-text s-18"></i>{{ __('Usuarios') }}
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="{{ route('business.index') }}">
+                        <i class="icon icon-equalizer gray-text s-18"></i>{{ __('Empresas') }}
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="{{ route('incident.index') }}">
+                        <i class="icon icon-equalizer gray-text s-18"></i>{{ __('Incidencias') }}
+                    </a>
+                </li>
             </ul>
         </li>
     
