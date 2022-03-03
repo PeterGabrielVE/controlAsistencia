@@ -11,7 +11,7 @@ class Incidente extends Model
     *
     * @var array
     */
-   protected $table = 'incidente';
+   protected $table = 'incidents';
 
    protected $fillable = [
         'date','comments','registered_by',

@@ -3,18 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Caffeinated\Shinobi\Models\Role;
-use Caffeinated\Shinobi\Models\Permission;
+use App\Models\Incidente;
 use Session;
 use Redirect;
 
 class IncidentController extends Controller
 {
-    private $permissions;
 
     public function __construct()
     {
-        $this->permissions = Permission::get()->pluck('name','id');
     }
 
     /**
@@ -24,9 +21,8 @@ class IncidentController extends Controller
      */
     public function index()
     {
-        $permissions = $this->permissions;
-        $roles = Role::all();
-        return view('pages.rol.index',compact('roles','permissions'));
+        $incidents = Incidente::all();
+        return view('pages.incidents.index',compact('incidents'));
     }
 
     /**
@@ -48,8 +44,7 @@ class IncidentController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $rol = Role::create($data);
-        $rol->syncPermissions($data['permits']);
+        $incident = Incidente::create($data);
         return response()->json(['message'=>'Rol registrado correctamente']);
     }
 
@@ -59,7 +54,7 @@ class IncidentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $rol)
+    public function show(Incidente $rol)
     {
         return response()->json($rol);
     }
@@ -70,7 +65,7 @@ class IncidentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $rol)
+    public function edit(Incidente $rol)
     {
         $rol = $rol;
         if ($rol->special == 'all-access') {
@@ -92,9 +87,8 @@ class IncidentController extends Controller
     public function update(Request $request, $id)
     {
 
-        $rol = Role::find($id);
+        $rol = Incidente::find($id);
         $rol->update($request->all());
-        $rol->syncPermissions($request->all('permits'));
         $rol->save();
         Session::flash('message-success','El rol '. $request->name.' fue editado correctamente.');
         return Redirect::to('rol');
@@ -106,7 +100,7 @@ class IncidentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $rol)
+    public function destroy(Incidente $rol)
     {
         $rol->delete();
         return response()->json(['message'=>'Rol eliminado correctamente']);
