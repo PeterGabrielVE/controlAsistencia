@@ -69,8 +69,10 @@ class BusinessController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
+        $edif = Business::find($id);
+        return response()->json($edif);
     }
 
     /**
@@ -82,7 +84,11 @@ class BusinessController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        $edif = Business::find($id);
+        $edif->update($request->all());
+        $edif->save();
+        toastr()->success('¡Se ha actualizado exitosamente!');
+        Session::flash('message-success',' Edificio '. $request->name .' editada correctamente.');
     }
 
     /**
@@ -91,14 +97,23 @@ class BusinessController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id)
     {
-        return response()->json(['message'=>'Rol eliminado correctamente']);
+        $edif = Business::find($id);
+        $edif->delete();
+        toastr()->success('¡Se ha eliminado exitosamente!');
+        return response()->json(['message'=>'Se ha eliminado correctamente']);
     }
 
     public function searchCommunes(Request $req)
     {
         $communes = Commune::where('region_id',$req->region_id)->get()->sortBy('name')->pluck('name','id')->prepend('Seleccione...','');
+        return response()->json($communes);
+    }
+
+    public function searchRegion(Request $req)
+    {
+        $communes = Commune::where('id',$req->commune_id)->value('region_id');
         return response()->json($communes);
     }
 }

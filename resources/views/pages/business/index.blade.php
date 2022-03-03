@@ -51,11 +51,11 @@
                                     <td>{{ $p->name ?? '' }}</td>
                                     <td>{{ $p->rut ?? '' }}</td>
                                     <td>{{ $p->phone ?? '' }}</td>
-                                    <td>{{ $p->email ?? '' }}</td>
+                                    <td>{{ $p->mail ?? '' }}</td>
                                     <td>{{ $p->flat ?? '' }}</td>
                                     <td>{{ $p->town ?? '' }}</td>
-                                    <td>{{ $p->commune ?? '' }}</td>
-                                    <td>{{ $p->id_region ?? '' }}</td>
+                                    <td>{{ $p->commune->name ?? '' }}</td>
+                                    <td>{{ $p->region->name ?? '' }}</td>
                                     <td class="text-center">
                                     {!! Form::open(['route'=>['business.destroy',$p->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
                                         

@@ -94,6 +94,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get("getGroupUser", "UserController@getGroupUser")->name("getGroupUser");
 	Route::get("form/create", "FormController@create")->name("form.create");
 	Route::get('searchCommunes','BusinessController@searchCommunes');
+	Route::get('searchRegion','BusinessController@searchRegion');
 });
 
 

@@ -43,7 +43,7 @@
 							</div>
                             <div class="form-group col-3 m-0" id="tipo_colacion_group">
 								{!! Form::label('lbl_commune', 'Comuna', ['class'=>'col-form-label s-12']) !!}
-								{!! Form::select('id_commune',$communes, null, ['class'=>'form-control r-0 light s-12','id'=>'id_communes']) !!}
+								{!! Form::select('id_commune',$communes, null, ['class'=>'form-control r-0 light s-12','id'=>'id_commune']) !!}
 							</div>
                             
                             <div class="form-group col-12 m-0" id="tipo_turno_group">
@@ -64,14 +64,55 @@
 </div>
 <script>
 	$( document ).ready(function() {
-		$('#id_region').on("click change", function(e) {
+		$('#id_region').on("click", function(e) {
 			let region = $(this).val();
 			$.ajax({
 				url:'searchCommunes',
 				data:{'region_id':region},
 				type:'get',
 				success: function (response) {
-							console.log(response);
+
+					$("#id_commune").find('option').remove();
+                     
+						var options = [];
+						$.each(response, function(key, value) {
+						    options.push($("<option/>", {
+						        value: key,
+						        text: value
+						    }));
+						});
+
+						var invertido = [];
+							for (i=options.length-1; i>=0; i--) {
+							  invertido.push( options[i] )
+						}
+
+						$("#id_commune").append(invertido);
+						console.log(response);
+				},
+				statusCode: {
+					404: function() {
+						alert('web not found');
+					}
+				},
+				error:function(x,xs,xt){
+					//nos dara el error si es que hay alguno
+					window.open(JSON.stringify(x));
+					//alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
+				}
+			});
+		})
+
+		$('#id_commune').on("click", function(e) {
+			let commune_id = $(this).val();
+			$.ajax({
+				url:'searchRegion',
+				data:{'commune_id':commune_id},
+				type:'get',
+				success: function (response) {
+
+					$("#id_region").val(response);
+                	console.log(response);
 				},
 				statusCode: {
 					404: function() {

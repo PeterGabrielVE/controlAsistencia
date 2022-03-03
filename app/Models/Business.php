@@ -22,5 +22,13 @@ class Business extends Model
     /**
     * Get the user that owns the Operations.
     */
+    public function region()
+    {
+        return $this->belongsTo('App\Region', 'id_region');
+    }
 
+    public function commune()
+    {
+        return $this->belongsTo('App\Commune', 'id_commune');
+    }
 }
