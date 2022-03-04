@@ -45,7 +45,7 @@ class IncidentController extends Controller
     {
         $data = $request->all();
         $incident = Incidente::create($data);
-        return response()->json(['message'=>'Rol registrado correctamente']);
+        return response()->json(['message'=>'Incidente registrado correctamente']);
     }
 
     /**
@@ -54,9 +54,9 @@ class IncidentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Incidente $rol)
+    public function show(Incidente $inc)
     {
-        return response()->json($rol);
+        return response()->json($inc);
     }
 
     /**
@@ -65,16 +65,10 @@ class IncidentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Incidente $rol)
+    public function edit($id)
     {
-        $rol = $rol;
-        if ($rol->special == 'all-access') {
-            $rol->special = 1;
-        }else{
-            $rol->special = 2;
-        }
-        $permissions = $this->permissions;
-        return view('pages.rol.edit', compact('rol','permissions'));
+        $inc = Incidente::find($id);
+        return response()->json($inc);
     }
 
     /**
@@ -87,11 +81,11 @@ class IncidentController extends Controller
     public function update(Request $request, $id)
     {
 
-        $rol = Incidente::find($id);
-        $rol->update($request->all());
-        $rol->save();
-        Session::flash('message-success','El rol '. $request->name.' fue editado correctamente.');
-        return Redirect::to('rol');
+        $inci = Incidente::find($id);
+        $inci->update($request->all());
+        $inci->save();
+        Session::flash('message-success','El incidente fue editado correctamente.');
+
     }
 
     /**
@@ -100,9 +94,10 @@ class IncidentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Incidente $rol)
+    public function destroy($id)
     {
-        $rol->delete();
-        return response()->json(['message'=>'Rol eliminado correctamente']);
+        $inci = Incidente::find($id);
+        $inci->delete();
+        return response()->json(['message'=>'Incidente eliminado correctamente']);
     }
 }

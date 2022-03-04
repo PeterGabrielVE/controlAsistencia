@@ -11,12 +11,16 @@
                 <div class="form-row">
                     <div class="col-md-12">
                         <div class="form-row">
-                            <div class="form-group col-12 m-0" id="name_group">
-                                <i class="icon-file-text mr-2"></i>
-                                {!! Form::label('modulo', 'Modulo', ['class'=>'col-form-label s-12']) !!}
-                                {!! Form::text('modulo', null, ['class'=>'form-control r-0 light s-12',  'id'=>'_modulo', 'onclick'=>'inputClear(this.id)']) !!}
-                                <span class="name_span"></span>
-                            </div>
+                            <div class="form-group col-4 m-0">
+								{!! Form::label('lbl_date', 'Fecha', ['class'=>'col-form-label s-12']) !!}
+								{!! Form::date('date', null, ['class'=>'form-control r-0 light s-12',  'id'=>'_date']) !!}
+							</div>
+							<div class="form-group col-12 m-0">
+								{!! Form::label('lbl_comment', 'Comentarios', ['class'=>'col-form-label s-12']) !!}
+								{!! Form::textarea('comments', null, ['class'=>'form-control r-0 light s-12',  'id'=>'_comments', 'rows'=>'2']) !!}
+
+								
+							</div>
                            
                         </div>
                        

@@ -23,4 +23,10 @@ class Incidente extends Model
     * Get the user that owns the Operations.
     */
 
+    public function user()
+    {
+        return $this->belongsTo('App\User','registered_by');
+    }
+
+
 }

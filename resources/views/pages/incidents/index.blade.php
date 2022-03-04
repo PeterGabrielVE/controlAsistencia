@@ -6,8 +6,7 @@ INCIDENTES</h1>
 @section('maincontent')
 {{-- modal create --}}
 @include('pages.incidents.create')
-{{-- modal show --}}
-@include('pages.incidents.show')
+
 {{-- modal edit --}}
 @include('pages.incidents.edit')
 <div class="page height-full">
@@ -47,14 +46,16 @@ INCIDENTES</h1>
                                     <td> {{$i->id}}</td>
                                     <td>{{ $i->date ?? null }}</td>
                                     <td>{{ $i->comments ?? null }}</td>
-                                    <td>{{ $i->registered_by ?? null }}</td>
+                                    <td>{{ $i->user->fullname ?? null }}</td>
                                     <td class="text-center">
-                                        <a href="#" class="btn btn-default btn-sm" title="Detalles" data-toggle="modal" data-target="#show" onclick="showData('{{ route('module.show', $i->id) }}')">
-                                            <i class="icon-eye text-info"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('module.edit',$i->id) }}', '{{ route('dataType.update',$i->id) }}')">
+                                    {!! Form::open(['route'=>['incident.destroy',$i->id],'method'=>'DELETE', 'class'=>'formlDinamic','id'=>'eliminarRegistro']) !!}
+                                        <a href="#" class="btn btn-default btn-sm" title="Editar" data-toggle="modal" data-target="#update" onclick="obtenerDatosGet('{{ route('incident.edit',$i->id) }}', '{{ route('incident.update',$i->id) }}')">
                                             <i class="icon-pencil text-info"></i>
                                         </a>
+                                        <button class="btn btn-default btn-sm" onclick="return confirm('¿Realmente deseas borrar el registro?')">
+                                                <i class="icon-trash-can3 text-danger"></i>
+                                        </button>
+                                    {!! Form::close() !!}
                                     </td>
                                 </tr>
                                 @endforeach
