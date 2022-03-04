@@ -197,6 +197,7 @@ class AsistenciaController extends Controller
 
         $user_detail = [
         'nombre' => $user->fullname.' '.$user->last_name,
+        'rut' => $user->rut,
         'fecha' => $fecha,
         'ip' => $ip,
         'tipo' => $tipo,
